@@ -86,7 +86,7 @@ angular
     //plc parameter
 	self.plcParamVo={};
 	self.plcParamVo.plcId ='';
-	self.plcParamVo.factId ='';
+	self.plcParamVo.factId ='C';
     
     self.countParamVo = {
         	factId : '',
@@ -320,18 +320,21 @@ angular
        	plcPromise.then(function(data) {
        		//console.log(data)
        		// 설비상태 카운트 변수
+       		self.count0=0; //비가동
        		self.count1=0; //가동
        		self.count2=0; //대기
-       		self.count4=0; //비가동
+       		self.count4=0; //알람
 
        		for(var i=0; i< data.length; i++){
        			if(data[i].plcId.split('_')[0]=="MPLC"){
-       				if(data[i].eqptSts ==0 ||data[i].eqptSts ==4){		//알람 카운트
-           				self.count4++;
-           			}else if(data[i].eqptSts ==1){	//가동 카운트
+       				if(data[i].eqptSts ==0){		//비가동 카운트
+       					self.count0++;
+       				}else if(data[i].eqptSts ==1){	//가동 카운트
            				self.count1++;
            			}else if(data[i].eqptSts ==2){	//대기 카운트
            				self.count2++;
+           			}else if(data[i].eqptSts ==4){	//알람 카운트
+           				self.count4++;
            			}
        			}
        		}

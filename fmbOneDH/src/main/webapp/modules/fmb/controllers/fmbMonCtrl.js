@@ -354,7 +354,6 @@ angular
        			}
        		}
        		$scope.plcList = data;
-       		debugger;
        		//데이터를 가져오는동안 깜빡임 방지
        		self.preplcList = data; 
        		self.plcList = self.preplcList;

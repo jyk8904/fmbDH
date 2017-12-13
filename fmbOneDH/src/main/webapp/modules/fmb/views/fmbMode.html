@@ -58,7 +58,8 @@
 		
 		<md-radio-button class="md-radio-button" value="PLC" >설비가동현황</md-radio-button>
  		<md-radio-button class="md-radio-button" value="ANDON">안돈현황</md-radio-button>
-		<md-radio-button class="md-radio-button" value="COUNT" >달성률현황</md-radio-button>
+		<!-- <md-radio-button class="md-radio-button" value="COUNT" >달성률현황</md-radio-button> -->
+		<md-radio-button class="md-radio-button" value="COUNT" >생산실적현황</md-radio-button>
 	</md-radio-group>	
 	</div>
 	<div style="float: left; padding:5px; width:20%;">
@@ -122,7 +123,8 @@
             				<md-option value="PLC"> PLC </md-option>
             				<md-option value="SPC"> SPC </md-option>
             				<md-option value="ANDON"> 안돈 </md-option>
-            				<md-option value="COUNT"> 달성률 </md-option>
+            				<!-- <md-option value="COUNT"> 달성률 </md-option> -->
+            				<md-option value="COUNT"> 생산실적 </md-option>
           				</md-select>
           			</md-input-container>
         			<div ng-switch on="vm.eqptParamVo.eqptType">
@@ -272,7 +274,8 @@
     				<md-option value="PLC"> PLC </md-option>
     				<!-- <md-option value="SPC"> SPC </md-option> -->
     				<md-option value="ANDON"> 안돈 </md-option>
-    				<md-option value="COUNT"> 달성률 </md-option>
+    				<!-- <md-option value="COUNT"> 달성률 </md-option> -->
+    				<md-option value="COUNT"> 생산실적 </md-option>
   				</md-select>
   			</md-input-container>
          </div>

@@ -87,20 +87,30 @@
 	            controller: 'FmbMonDCtrl',
 	            templateUrl: 'modules/fmb/views/fmbMonD.html',
 	            controllerAs: 'vm'
-	        })
-	        .when('/FmbAndon', {
-	            controller: 'FmbAndonCtrl',
-	            templateUrl: 'modules/fmb/views/fmbAndon.html',
+	        }) 
+	        .when('/FmbLineA', {
+	            controller: 'FmbLineACtrl',
+	            templateUrl: 'modules/fmb/views/fmbLineA.html',
 	            controllerAs: 'vm'
 	        })
-	        .when('/FmbCwMon', {
-	            controller: 'FmbCwMonCtrl',
-	            templateUrl: 'modules/fmb/views/fmbCwMon.html',
+	        .when('/FmbLineB', {
+	            controller: 'FmbLineBCtrl',
+	            templateUrl: 'modules/fmb/views/fmbLineB.html',
 	            controllerAs: 'vm'
 	        })
-	        .when('/FmbMainMon', {
-	            controller: 'FmbMainMonCtrl',
-	            templateUrl: 'modules/fmb/views/fmbMainMon.html',
+	        .when('/FmbLineC', {
+	            controller: 'FmbLineCCtrl',
+	            templateUrl: 'modules/fmb/views/fmbLineC.html',
+	            controllerAs: 'vm'
+	        })
+	        .when('/FmbLineD', {
+	            controller: 'FmbLineDCtrl',
+	            templateUrl: 'modules/fmb/views/fmbLineD.html',
+	            controllerAs: 'vm'
+	        })
+	        .when('/FmbCount', {
+	            controller: 'FmbCountCtrl',
+	            templateUrl: 'modules/fmb/views/fmbCount.html',
 	            controllerAs: 'vm'
 	        })
 	        .when('/FmbMode', {
@@ -118,86 +128,6 @@
 	            templateUrl: 'modules/fmb/views/fmbTbm.html',
 	            controllerAs: 'vm'
 	        })	 
-      	    .when('/FmbLine001', {
-	            controller: 'FmbLine001Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbLine001.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbLine002', {
-	            controller: 'FmbLine002Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbLine002.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbLine003', {
-	            controller: 'FmbLine003Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbLine003.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbLine004', {
-	            controller: 'FmbLine004Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbLine004.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbLine005', {
-	            controller: 'FmbLine005Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbLine005.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbLine006', {
-	            controller: 'FmbLine006Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbLine006.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbLine007', {
-	            controller: 'FmbLine007Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbLine007.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbFactAll', {
-	            controller: 'FmbFactAllCtrl',
-	            templateUrl: 'modules/fmb/views/fmbFactAll.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbFact001', {
-	            controller: 'FmbFact001Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbFact001.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbFact002', {
-	            controller: 'FmbFact002Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbFact002.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbFact003', {
-	            controller: 'FmbFact003Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbFact003.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbFact004', {
-	            controller: 'FmbFact004Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbFact004.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbFact005', {
-	            controller: 'FmbFact005Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbFact005.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbFact006', {
-	            controller: 'FmbFact006Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbFact006.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbFact007', {
-	            controller: 'FmbFact007Ctrl',
-	            templateUrl: 'modules/fmb/views/fmbFact007.html',
-	            controllerAs: 'vm'
-	        })
-	        .when('/FmbSpc', {
-	            controller: 'FmbSpcCtrl',
-	            templateUrl: 'modules/fmb/views/fmbSpc.html',
-	            controllerAs: 'vm'
-	        })
 	        .when('/FmbTotal', {
 	            controller: 'FmbTotalCtrl',
 	            templateUrl: 'modules/fmb/views/fmbTotal.html',

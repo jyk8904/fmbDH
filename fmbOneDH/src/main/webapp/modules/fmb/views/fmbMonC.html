@@ -36,10 +36,16 @@
 <bc-form-header title="생산 자원 통합 모니터링 (C동)" is-mobile="isMobile" on-swipe-right="onSwipeRight()"  style="display:flex; align-items:center; flex-wrap: wrap;">
 
 <bc-legend>
-<div class="col-lg-6 col-md-6 col-sm-5 col-xs-10 lineInfo">가동 : {{vm.count1}} &nbsp; &nbsp;
-비가동 : {{vm.count4}} &nbsp; &nbsp;
-대기 : {{vm.count2}}</div>
-<img class="col-lg-6 col-md-6 col-sm-7 col-xs-10 legend" src="assets/img/system/legend3.png">
+<div class="col-lg-7 col-md-7 col-sm-6 col-xs-11 lineInfo">가동 : {{vm.count1}} &nbsp; &nbsp;
+알람 : {{vm.count4}} &nbsp; &nbsp;
+대기 : {{vm.count2}} &nbsp; &nbsp;
+비가동 : {{vm.count0}}
+
+</div>
+<div class="col-lg-5 col-md-5 col-sm-6 col-xs-9 legend" style="background:url('assets/img/system/legend5.png'); 
+	background-size:cover; background-repeat: no-repeat; background-position: 70px; height:80px;">
+</div>
+
 
 
 </bc-legend>
