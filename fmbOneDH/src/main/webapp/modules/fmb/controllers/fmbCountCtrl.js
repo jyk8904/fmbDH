@@ -272,6 +272,7 @@ angular
     function getCountEqptList(){
 	    	countEqptPromise = CmmAjaxService.select("bas/selectFmbEqpt.do", self.countEqptParamVo);
 	    	countEqptPromise.then(function(data) {
+	    		console.log(data)
 	    		self.preCountEqptList = data; //fmbEqptVo가 담긴 리스트 형태리턴
 	    		self.countEqptList = self.preCountEqptList; 
 	    		countEqptPromise = null;
@@ -301,13 +302,15 @@ angular
 	};
 	function countBindData(){
 		for(var i =0; i < self.countEqptList.length; i++){
-			var target = $filter('filter')(self.countList, {lineCd : self.countEqptList[i].id});
+			var target = $filter('filter')(self.countList, {plcId : self.countEqptList[i].id});
 			/*var random = Math.floor(Math.random()*199);
 			 * target[0].dtRate = random;
 			 * */
 			
 			self.countStsData[i]= target[0];
+			
 		}
+		console.log(self.countStsData);
 	};
     function andonBindData(){//안돈신호 올라오면 수정해야함
 		for(var i =0; i < self.andonEqptList.length; i++){

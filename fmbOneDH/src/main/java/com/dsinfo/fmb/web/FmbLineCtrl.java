@@ -39,7 +39,7 @@ public class FmbLineCtrl {
 	public ResponseEntity<List<FmbLineVO>> selectFmbLine(@RequestBody FmbLineVO vo)  {
     	//RequestBody : JSON형태로 보낸 vo를 컬럼명이 똑같으면 FmbLineParamVO형태로 알아서 매핑,변환
 		List<FmbLineVO> fmbLineVO = null;
-		System.out.println("FmbLine.do로 이동");
+		System.out.println("FmbLine.do로 이동!!");
 		try {
 			//mBcfBizService : select, insert, delete, update 구문과 vo를 정형화 해놓음
 			//
@@ -48,6 +48,7 @@ public class FmbLineCtrl {
 			fmbLineVO = (List<FmbLineVO>) mBcfBizService.select("sql-bas-info.selectFmbLine", vo);
 			System.out.println("vo" +vo.getLineCd());
 			log.info(vo.getLineCd());
+			log.info("plcId는 = " +vo.getPlcId());
 			log.error(vo.getFactId());
 			
 			return new ResponseEntity<List<FmbLineVO>>(fmbLineVO, HttpStatus.OK);

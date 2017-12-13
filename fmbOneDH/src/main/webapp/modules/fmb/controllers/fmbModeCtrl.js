@@ -117,9 +117,10 @@ angular
 							}
 							// count parameter
 							self.countParamVo = {
-								factId : '',
+								factId : 'Comb',
 								lineCd : '',
 								lineNm : '',
+								plcId : '',
 								dGoal : '',
 								nGoal : '',
 								eqptStst : '',
@@ -311,34 +312,36 @@ angular
 									// console.log(self.eqptList);
 
 								} else if (self.eqptParamVo.eqptType == "COUNT") {
-									var classList = $filter('orderBy')(
-											self.eqptList, 'eqptCnm');
+									
+									var classList = $filter('orderBy')(self.eqptList, 'eqptCnm');
 									if (classList.length == 0) {
 										$scope.crtEqpt.cnm = 'count001';
 									} else {
-										var latestNum = classList[classList.length - 1].eqptCnm
-												.split('count')[1];
+										var latestNum = classList[classList.length - 1].eqptCnm.split('count')[1];
 
-										$scope.crtEqpt.cnm = 'count'
-												+ leadingZeros(
-														parseInt(latestNum) + 1,
-														3);
+										$scope.crtEqpt.cnm = 'count'+ leadingZeros(parseInt(latestNum) + 1,3);
 									}
-
+									//차집합 countList - 이미 생성된 eqptList
 									var tmp = {}, res = [];
 									for (var i = 0; i < self.countList.length; i++)
-										tmp[self.countList[i].lineCd] = 1;
-									if (self.eqptList != null) {
+										tmp[self.countList[i].plcId] = 1;
+									if (self.eqptList.length!=0) {//eqptList가 있을경우
 										for (var i = 0; i < self.eqptList.length; i++) {
 											if (tmp[self.eqptList[i].id])
 												delete tmp[self.eqptList[i].id];
 										}
+										for ( var k in tmp)
+											res.push(k);
+										console.log(res);
+										
+									}else{
+										
+										for (var i = 0; i < self.countList.length; i++) {
+											res.push(self.countList[i].plcId);
+											
+										}
 									}
-									for ( var k in tmp)
-										res.push(k);
-									console.log(res);
 									self.countLst = res;
-									console.log(self.countLst);
 								}
 
 								self.showModal = !self.showModal;

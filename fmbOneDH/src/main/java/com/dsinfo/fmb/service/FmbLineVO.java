@@ -9,6 +9,7 @@ public class FmbLineVO extends MBasAbsVO {
 	private String fact_id;
 	private String line_cd;
 	private String line_nm;
+	private String plc_id;
 	private int d_goal;
 	private int n_goal;
 	private int goal_count;
@@ -245,6 +246,14 @@ public class FmbLineVO extends MBasAbsVO {
 
 	public void setLineBotNm(String line_bot_nm) {
 		this.line_bot_nm = line_bot_nm;
+	}
+
+	public String getPlcId() {
+		return plc_id;
+	}
+
+	public void setPlcId(String plc_id) {
+		this.plc_id = plc_id;
 	}
 
 	
