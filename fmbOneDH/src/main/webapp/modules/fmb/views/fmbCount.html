@@ -88,10 +88,10 @@
 				  ng-style="{'top':count.cssTop, 'left': count.cssLeft, 'width':count.cssWidth, 'height':count.cssHeight,'z-index':count.cssZindex}">
 	              <div ng-switch on="vm.stsData[$index].eqptSts" style="display:flex; justify-content:center;">  
 	               <div ng-style="{'width':eqpt.cssWidth, 'height':eqpt.cssHeight}">
-	                <div ng-switch on="vm.countStsData[$index].eqptSts">  
+	                <div ng-switch on="vm.stsData[$index].eqptSts">  
 	           	     <p ng-switch-when="0" style="color:#FFC000; font-size:19px; font-weight:bold; background-color:white;">{{vm.countStsData[$index].dcount + vm.countStsData[$index].ncount|number:0}}</p>
 	           	     <p ng-switch-when="1" style="color:#FFC000; font-size:19px; font-weight:bold; background-color:green;">{{vm.countStsData[$index].dcount + vm.countStsData[$index].ncount|number:0}}</p>
-	           	    <p ng-switch-when="2" style="color:#FFC000; font-size:19px; font-weight:bold; background-color:yellow;">{{vm.countStsData[$index].dcount + vm.countStsData[$index].ncount|number:0}}</p>
+	           	    <p ng-switch-when="2" style="color:#FFC000; font-size:19px; font-weight:bold; background-color:r;">{{vm.countStsData[$index].dcount + vm.countStsData[$index].ncount|number:0}}</p>
 	           	    <p ng-switch-when="3" style="color:#FFC000; font-size:19px; font-weight:bold; background-color:white;">{{vm.countStsData[$index].dcount + vm.countStsData[$index].ncount|number:0}}</p>
 	           	    <p ng-switch-when="4" style="color:#FFC000; font-size:19px; font-weight:bold; background-color:red;">{{vm.countStsData[$index].dcount + vm.countStsData[$index].ncount|number:0}}</p>
 	           	    

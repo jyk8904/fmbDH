@@ -299,18 +299,16 @@ angular
 			var target = $filter('filter')(self.plcList, {plcId : self.eqptList[i].id});
 			self.stsData[i]= target[0];
 		}
+		console.log(self.stsData);
 	};
 	function countBindData(){
+
 		for(var i =0; i < self.countEqptList.length; i++){
 			var target = $filter('filter')(self.countList, {plcId : self.countEqptList[i].id});
-			/*var random = Math.floor(Math.random()*199);
-			 * target[0].dtRate = random;
-			 * */
-			
 			self.countStsData[i]= target[0];
-			
 		}
 		console.log(self.countStsData);
+		debugger;
 	};
     function andonBindData(){//안돈신호 올라오면 수정해야함
 		for(var i =0; i < self.andonEqptList.length; i++){
@@ -337,26 +335,29 @@ angular
        	plcPromise.then(function(data) {
        		//console.log(data)
        		// 설비상태 카운트 변수
+       		self.count0=0; //비가동
        		self.count1=0; //가동
        		self.count2=0; //대기
-       		self.count4=0; //비가동
+       		self.count4=0; //알람
        		       		
        		//데이터가없기때문에 랜덤값 입력
-       		for(var i=0; i< data.length; i++){
+       		/*for(var i=0; i< data.length; i++){
    		   		var random = Math.floor(Math.random()*3);
            		if(random==0){
            			random = 4;
            		}
            		data[i].eqptSts = random;
-       		}
+       		}*/
        		for(var i=0; i< data.length; i++){
        			if(data[i].plcId.split('_')[0]=="MPLC"){
-       				if(data[i].eqptSts ==0 ||data[i].eqptSts ==4){		//알람 카운트
-           				self.count4++;
+       				if(data[i].eqptSts ==0){		//비가동 카운트
+           				self.count0++;
            			}else if(data[i].eqptSts ==1){	//가동 카운트
            				self.count1++;
            			}else if(data[i].eqptSts ==2){	//대기 카운트
            				self.count2++;
+           			}else if(data[i].eqptSts ==4){	//알람 카운트
+           				self.count4++;
            			}
        			}
        		}
@@ -373,15 +374,15 @@ angular
 	}
 	//count 데이터 가져오기
 	function getCountList(){
-		countPromise = CmmAjaxService.select("bas/selectFmbLine.do",  self.countParamVo);
+		countPromise = CmmAjaxService.select("bas/selectFmbLine.do",  self.lineParamVo);
 		countPromise.then(function(data) {
 			//데이터가없기때문에 랜덤값 입력
-       		for(var i=0; i< data.length; i++){
+       		/*for(var i=0; i< data.length; i++){
    		   		var random1 = Math.floor(Math.random()*700);
    		   		var random2 = Math.floor(Math.random()*700);
            		data[i].dcount= random1;
            		data[i].ncount= random2;
-       		}
+       		}*/
        		
        		//데이터를 가져오는동안 깜빡임 방지
        		self.precountList = data; 
