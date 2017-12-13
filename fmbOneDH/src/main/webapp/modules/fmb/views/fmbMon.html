@@ -82,9 +82,9 @@
 		</ul>
  	</div>
     <!-- 달성률 -->
-	<div class="EQPT col-md-12 col-sm-12 col-xs-12" style="padding:0">	
+	<!-- <div class="EQPT col-md-12 col-sm-12 col-xs-12" style="padding:0">	
 		 <ul>
-			<!-- 설비이미지 repeat -->
+			설비이미지 repeat
 			<li u-ctrl data="count" ng-repeat="count in vm.countEqptList track by $index">
 				  <div class="{{count.eqptCnm}}" type="{{count.eqptType}}" plc="{{count.id}}"
 				  ng-style="{'top':count.cssTop, 'left': count.cssLeft, 'width':count.cssWidth, 'height':count.cssHeight,'z-index':count.cssZindex}">
@@ -97,40 +97,40 @@
 				</div>
 			</li>
 		</ul>
- 	</div>
+ 	</div> -->
  	<!-- andon -->
- 	<div class="EQPT col-md-12 col-sm-12 col-xs-12" style="padding:0">	
+ 	<!-- <div class="EQPT col-md-12 col-sm-12 col-xs-12" style="padding:0">	
 		 <ul>
-			<!-- 설비이미지 repeat -->
+			설비이미지 repeat
 			<li u-ctrl data="andon" ng-repeat="andon in vm.andonEqptList track by $index">
-			 <!-- <div class="{{eqpt.eqptCnm}}" type="{{eqpt.eqptType}}" plc="{{eqpt.plcId}}"
+			 <div class="{{eqpt.eqptCnm}}" type="{{eqpt.eqptType}}" plc="{{eqpt.plcId}}"
 				  style="top:{{eqpt.cssTop}}; left: {{eqpt.cssLeft}}; 
 				  		 width:{{eqpt.cssWidth}}; height:{{eqpt.cssHeight}}; 
-				  		 z-index:{{eqpt.cssZindex}};"> -->
+				  		 z-index:{{eqpt.cssZindex}};">
 				  <div class="{{andon.eqptCnm}}" type="{{andon.eqptType}}" plc="{{andon.id}}"
 				  ng-style="{'top':andon.cssTop, 'left': andon.cssLeft, 'width':andon.cssWidth, 'height':andon.cssHeight,'z-index':andon.cssZindex}">
-				  <!-- test -->
-				  <!-- 자재결품 --><!-- Q -->
+				  test
+				  자재결품 --><!-- Q
 				  <span ng-switch on="vm.andonStsData[$index].qcmBadSts">
 			 	  <img ng-switch-when="0" class="andonbtn" ng-src="{{andon.stsImg0}}">
 			 	  <img ng-switch-when="1" class="andonbtn" ng-src="{{andon.stsImg1}}">
 			 	  <img ng-switch-default class="andonbtn" src="assets/img/button/colorQ.png">
 			 	  </span>
-			 	  <!-- 품질이상 --><!-- S -->
+			 	  품질이상 --><!-- S
 			 	  <span ng-switch on="vm.andonStsData[$index].matMissSts">  
 			 	  <img ng-switch-when="0" class="andonbtn" ng-src="{{andon.stsImg2}}">
 			 	  <img ng-switch-when="1" class="andonbtn" ng-src="{{andon.stsImg3}}">
 			 	  <img ng-switch-default class="andonbtn" src="assets/img/button/colorS.png">
 			 	  </span>
-			 	  <!-- 품목교체 --><!-- C -->
+			 	  품목교체 --><!-- C
 			 	  <span ng-switch on="vm.andonStsData[$index].itemChaSts">  
 			 	  <img ng-switch-when="0" class="andonbtn" ng-src="{{andon.stsImg4}}">
 			 	  <img ng-switch-when="1" class="andonbtn" ng-src="{{andon.stsImg5}}">
 			 	  <img ng-switch-default class="andonbtn" src="assets/img/button/colorC.png">
 			 	  </span>
 
-			  	  <!-- test -->
-	              <!-- <div ng-switch on="vm.andonStsData[$index].eqptSts">  
+			  	  test
+	              <div ng-switch on="vm.andonStsData[$index].eqptSts">  
 	               <img ng-switch-when="0" class="obj" src="{{andon.stsImg4}}" align="center" ng-style="{'width':andon.cssWidth, 'height':andon.cssHeight, 'position':'absolute'}">
 	               <img ng-switch-when="1" class="obj" src="{{andon.stsImg1}}" align="center" ng-style="{'width':andon.cssWidth, 'height':andon.cssHeight, 'position':'absolute'}">
 	               <img ng-switch-when="2" class="obj" src="{{andon.stsImg2}}" align="center" ng-style="{'width':andon.cssWidth, 'height':andon.cssHeight, 'position':'absolute'}">
@@ -138,12 +138,12 @@
 	               <img ng-switch-when="4" class="obj" src="{{andon.stsImg4}}" align="center" ng-style="{'width':andon.cssWidth, 'height':andon.cssHeight, 'position':'absolute'}">
 	               <img ng-switch-default  class="obj" src="{{andon.stsImg0}}" align="center" ng-style="{'width':andon.cssWidth, 'height':andon.cssHeight, 'position':'absolute'}">
 	             
-	              </div>  -->
-	               <!-- ng-show="hover[$index] -->
+	              </div> 
+	               ng-show="hover[$index]
 				</div>
 			</li>
 		</ul>
- 	</div>
+ 	</div> -->
  	
 	</div>
 	</bc-back-panel2>

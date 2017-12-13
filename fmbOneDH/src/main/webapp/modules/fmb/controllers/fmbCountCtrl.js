@@ -374,7 +374,7 @@ angular
 	}
 	//count 데이터 가져오기
 	function getCountList(){
-		countPromise = CmmAjaxService.select("bas/selectFmbLine.do",  self.lineParamVo);
+		countPromise = CmmAjaxService.select("bas/selectFmbLine.do",  self.countParamVo);
 		countPromise.then(function(data) {
 			//데이터가없기때문에 랜덤값 입력
        		/*for(var i=0; i< data.length; i++){
