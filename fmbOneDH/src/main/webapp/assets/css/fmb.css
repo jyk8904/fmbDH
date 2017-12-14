@@ -1080,10 +1080,35 @@ background-color: #272727;
 	white-space:nowrap;
 	display: inline-block;
 	z-index:1;
+	
 	/* opacity:0.7; */
 }
 
-
+.black{
+	color:black !important;
+}
+.countInfo{
+	padding: 2px 5px;
+	width:67px;
+    border-radius: 6px;
+    color:white; 
+    font-size:19px; 
+    font-weight:bold; 
+}
+.countHintInfo{
+	background-color: #444;
+	border:1px solid #222;
+	border-radius:7px;
+	color:white;
+	padding:3px;
+	position:absolute;
+	top:25px;
+	white-space:nowrap;
+	display: inline-block;
+	z-index:1;
+	
+	/* opacity:0.7; */
+}
 /* bcFormBody */
 .bg-panel {
 	position:absolute;

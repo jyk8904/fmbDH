@@ -577,7 +577,6 @@ angular
 								countPromise.then(function(data) {
 									self.countList = data;
 									// console.log(self.countList)
-									debugger;
 								}, function(data) {
 									/* alert('fail: '+ data) */
 									console.log('fail' + data);

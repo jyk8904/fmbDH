@@ -99,12 +99,15 @@
     <select id="selectDateAndonInfo" resultType="com.dsinfo.fmb.service.FmbDateAndonInfoVO">     	      
         {call USP_DASH_DATE_ANDONINFO_SELECT01()}
     </select> 
-           <!--팝업발생추이정보조회 -->
+    <!--팝업용 plc별 발생추이정보조회 -->
     <select id="selectDateRunInfo" parameterType="com.dsinfo.fmb.service.FmbEqptStsHisParamVO" resultType="com.dsinfo.fmb.service.FmbDateRunInfoVO">     	
           {call USP_DASH_DATE_RUNINFO_SELECT03(#{plc_id})}
         <!-- {call USP_DASH_DATE_RUNINFO_SELECT01()} -->
     </select> 
-    
+    <!--대시보드용 전체 발생추이정보조회 -->
+    <select id="selectDashDateRunInfo" resultType="com.dsinfo.fmb.service.FmbDateRunInfoVO">     	
+        {call USP_DASH_DATE_RUNINFO_SELECT01()} 
+    </select> 
     <!-- Total- 설비 안돈신호별순위 그리드 정보조회 -->    
     <select id="selectRankAndonInfo" resultType="com.dsinfo.fmb.service.FmbRankAndonInfoVO">     	      
         {call USP_DASH_RANK_ANDONINFO_SELECT01()}

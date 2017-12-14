@@ -46,8 +46,6 @@ angular
 	/*------------------------------------------
      * 변수 선언
      *-----------------------------------------*/
-
-
     							    
     var self = this;
 
@@ -61,12 +59,6 @@ angular
     $scope.isMobile = false;
     $scope.showBar1 = true;
     $rootScope.showBar = $location.url();
-    //PLC설비parameter
-    self.eqptParamVo = { factId   :'Comb'
-    				   , eqptType :'PLC'
-    				   , id  	  :''
-    				   , eqptCnm  :''
-    				} ;
     //count 설비 param
     self.countEqptParamVo = { factId    : 'Comb'
     						, eqptType  : 'COUNT'
@@ -78,23 +70,6 @@ angular
 	self.plcParamVo.plcId ='';
 	self.plcParamVo.factId ='';
     
-    self.countParamVo = {
-        	factId : '',
-        	lineCd : '',
-        	lineNm : '',
-        	dGoal: '',
-        	nGoal : '',
-        	eqptStst : '',
-        	dCount: '',
-        	nCount: '',
-        	dRate : '',
-        	nRate : '',
-        	lineTopNm: '',
-        	lineMidNm: '',
-        	lineBotNm: ''
-        }
-	
-	self.stsData = [];
 	self.countStsData = [];
 	self.BgList = {
 	    factId: 'Comb'
@@ -120,15 +95,13 @@ angular
    	 $scope.hover[index] = false;
     }
 	function dataChk(){ //function(getplcList, getEqptList, bindData) 순서제어
-	   	    if(self.preplcList==undefined || self.preeqptList==undefined 
-	   	    || self.precountList==undefined || self.preCountEqptList==undefined){//모든 데이터를 읽지 못했을경우
+	   	    if(self.preplcList==undefined || self.preCountEqptList==undefined){//모든 데이터를 읽지 못했을경우
 	   	    	var dataChkTimeout= $timeout(function(){
 	   	    	}, 100)
 	   	    	.then(function(){
 	   	    		dataChk();
 	   	    	});
 	   		}else{ 													//모든 데이터를 읽어들인 경우
-	   			bindData();
 	   			countBindData();
 	   			dataChkTimeout.cancel();
 	   			dataChkTimeout = null;
@@ -178,37 +151,17 @@ angular
     // 팝업 테스트용 코드입니다....
     var customFullscreen = false;
 
-    //설비 이미지리스트 가져오기 메소드
-    function getEqptList(){
-	    	eqptPromise = CmmAjaxService.select("bas/selectFmbEqpt.do", self.eqptParamVo);
-	    	eqptPromise.then(function(data) {
-	    		self.preeqptList = data; //fmbEqptVo가 담긴 리스트 형태리턴
-	    		self.eqptList = self.preeqptList; 
-	    		eqptPromise = null;
-	    	}, function(data){
-	    		/*alert('fail: '+ data)*/
-	    		console.log('fail'+data);
-	    	});
-    }
     //count 이미지리스트 가져오기 메소드
     function getCountEqptList(){
 	    	countEqptPromise = CmmAjaxService.select("bas/selectFmbEqpt.do", self.countEqptParamVo);
 	    	countEqptPromise.then(function(data) {
-	    		console.log(data)
 	    		self.preCountEqptList = data; //fmbEqptVo가 담긴 리스트 형태리턴
 	    		self.countEqptList = self.preCountEqptList; 
 	    		countEqptPromise = null;
 	    	}, function(data){
-	    		/*alert('fail: '+ data)*/
 	    		console.log('fail'+data);
 	    	});
     }
-    function bindData(){
-		for(var i =0; i < self.eqptList.length; i++){
-			var target = $filter('filter')(self.plcList, {plcId : self.eqptList[i].id});
-			self.stsData[i]= target[0];
-		}
-	};
 
 	function countBindData(){
 
@@ -216,14 +169,12 @@ angular
 			var target = $filter('filter')(self.plcList, {plcId : self.countEqptList[i].id});
 			self.countStsData[i]= target[0];
 		}
-		debugger;
 	};
 
 	//설비 plc 데이터 가져오기
 	function getPlcList(){
    		plcPromise = CmmAjaxService.select("bas/selectFmbPlc.do", self.plcParamVo);
        	plcPromise.then(function(data) {
-       		//console.log(data)
        		// 설비상태 카운트 변수
        		self.count0=0; //비가동
        		self.count1=0; //가동
@@ -250,34 +201,15 @@ angular
        		self.plcList = self.preplcList;
        		plcPromise = null;
        	}, function(data){
-       		/*alert('fail: '+ data)*/
-    		console.log('fail'+data);
-       });
-	}
-	//count 데이터 가져오기
-	function getCountList(){
-		countPromise = CmmAjaxService.select("bas/selectFmbLine.do",  self.countParamVo);
-		countPromise.then(function(data) {
-       		//데이터를 가져오는동안 깜빡임 방지
-       		self.precountList = data; 
-       		self.countList = self.precountList;
-       		countPromise = null;
-       	}, function(data){
-       		/*alert('fail: '+ data)*/
     		console.log('fail'+data);
        });
 	}
 	function getData(){
 		self.preplcList = undefined;
-		self.preeqptList = undefined;
 		self.preCountEqptList = undefined;
-		self.precountList = undefined;
 
-		getEqptList();
 		getCountEqptList();
-		
    		getPlcList();
-   		getCountList();
 	} 	
     	
 }]);

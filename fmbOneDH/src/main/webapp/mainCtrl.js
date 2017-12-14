@@ -156,16 +156,11 @@ angular
 	getAlarmList();
 	//설비 plc 알람정보 데이터 가져오기
 	function getAlarmList(){
-		//console.log("getalarmList!!!")
    			var alarmList = [];
    			var plcPromise = CmmAjaxService.select("bas/selectFmbPlc.do", self.plcParamVo);
    				var alarmListWdth = 0;
 				plcPromise.then(function(data) {
-					//test용 random값 지정
-					/*for(var i = 0; i< data.length; i++){
-	               		var random = Math.floor(Math.random()*5);
-	               		data[i].eqptSts3 = random;
-	           		}*/
+					
 					for (var i = 0; i < data.length; i++) {
 						if(data[i].eqptSts3=='4'){ //sts== 0이나 4일경우 하단바에 알람 발생 경고()
 							data[i].charLen = String(data[i].lineNm).length; // 라인명 글자수 
@@ -174,21 +169,21 @@ angular
 							alarmList.push(data[i]);
 						}
 						if(data[i].tagId!=''){ //tagId가 있는 경우 데이터 추가
+						//if(data[i].tagId!=null){ //tagId가 있는 경우 데이터 추가
 							data[i].charLen = String(data[i].lineNm).length + String(data[i].alamNm).length; // 라인명 글자수 
 							data[i].wdth= data[i].charLen * 14.5 + 311;//(li의 width값 = 글자수 *15px + 311px)
-							alarmListWdth = alarmListWdth + data[i].wdth + 10; //margin-right:10px
+							alarmListWdth = alarmListWdth + data[i].wdth + 20; //margin-right:10px
 							alarmList.push(data[i]);
-											
 						}
 					}
 					$scope.screenWdth = $window.innerWidth;
-					$scope.alarmListLen = $scope.alarmList.length;	// 알람리스트 갯수
 					$scope.alarmListWdth = alarmListWdth;
 					$scope.alarmList = alarmList;
 					plcPromise = null;
 				}, function(data){
 					console.log('fail'+data);
 				});
+				
 	}
    defaultLotationSetting();
    function defaultLotationSetting(){

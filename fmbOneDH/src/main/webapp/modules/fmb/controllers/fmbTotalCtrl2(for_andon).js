@@ -30,6 +30,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		var splitChartInterval = null;
 		var splitChartData = null;
 		var chartFlag = false;
+		var rankAndonInfoList = null;
 		var gaugeRunInfoList = null;
 		var defectRankList = null;
 		var defectRate = null;
@@ -67,7 +68,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		
 		$scope.isMobile = false;
 		// 변수 선언 및 디폴트 값 세팅 
-		var dateRunInfoList = {};
+		var dateAndonInfoList = {};
 		var planProgressList = {};
 		var defectChart = {};
 		
@@ -76,9 +77,10 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 	    , { actYn: "", avgCount: "-1146", avgCountPer: "-157", curCountPer: "102", desc: "null", goalCount: "200", goalCountPer: "0", lineCd: "0802", lineNm: "AXLE ASS'Y\n(DH/HI/KH)2", totCount: "249"}];
 
 		self.info = {
-				alarm : { firstTitle : "null", firstValue : "null", secondTitle : "null", secondValue : "null", thirdTitle : "null", thirdValue : "null" },
-				standby : { firstTitle : "null", firstValue : "null", secondTitle : "null", secondValue : "null", thirdTitle : "null", thirdValue : "null" },
-				norun : { firstTitle : "null", firstValue : "null", secondTitle : "null", secondValue : "null", thirdTitle : "null", thirdValue : "null" },
+				qcmBad : { firstTitle : "null", firstValue : "null", secondTitle : "null", secondValue : "null", thirdTitle : "null", thirdValue : "null" },
+				matMiss : { firstTitle : "null", firstValue : "null", secondTitle : "null", secondValue : "null", thirdTitle : "null", thirdValue : "null" },
+				itemCha : { firstTitle : "null", firstValue : "null", secondTitle : "null", secondValue : "null", thirdTitle : "null", thirdValue : "null" },
+				rework : { firstTitle : "null", firstValue : "null", secondTitle : "null", secondValue : "null", thirdTitle : "null", thirdValue : "null" }
 		};
 		self.defect = {
 				firstNm: null, firstCount: null, secondNm: null, secondCount: null, thirdNm: null, thirdCount: null, forthNm: null, forthCount: null,
@@ -254,7 +256,6 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					try
 					{
 						self.gaugeRunInfoList = data;
-						console.log(self.gaugeRunInfoList)
 						data = null;
 						promise4 = null;
 					}
@@ -265,12 +266,23 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					//alert('fail: ' + data)
 					console.log('fail: '+ data);
 				});
-				promise5 = CmmAjaxService.select("bas/selectDashDateRunInfo.do");
+				promise5 = CmmAjaxService.select("bas/selectDateAndonInfo.do");
 				promise5.then(function(data) {
 					try
 					{
-						dateRunInfoList = data;
-						console.log(dateRunInfoList)
+						dateAndonInfoList = data;
+						//test용 코드
+						/*for(i=0; i<dateAndonInfoList.length; i++){
+							dateAndonInfoList[i].qcmBadCount = 10;
+							dateAndonInfoList[i].qcmBadTm = 10;
+							dateAndonInfoList[i].qcmBadDur = 10;
+							dateAndonInfoList[i].matMissCount = 10;
+							dateAndonInfoList[i].matMissTm = 10;
+							dateAndonInfoList[i].matMissDur = 10;
+							dateAndonInfoList[i].itemChaCount = 10;
+							dateAndonInfoList[i].itemChaTm = 10;
+							dateAndonInfoList[i].itemChaDur = 10;
+						}*/
 						data = null;
 						promise5 = null;
 					}
@@ -278,13 +290,13 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					{
 					
 						if ($scope.isMobile) {
-							MobileAlarmDateRunInfo();
-							MobileNorunDateRunInfo();
-							MobileStandbyDateRunInfo();
+							MobileQcmBadDateAndonInfo();
+							MobileMatMissDateAndonInfo();
+							MobileItemChaDateAndonInfo();
 						}else{
-							alarmDateRunInfo();
-							norunDateRunInfo();
-							standbyDateRunInfo();
+							qcmBadDateAndonInfo();
+							matMissDateAndonInfo();
+							itemChaDateAndonInfo();
 						}
 					}		
 				}, function(data) {
@@ -297,7 +309,6 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					try
 					{
 						planProgressList = data;
-						console.log(data)
 						data = null;
 						promise7 = null;
 					}
@@ -341,17 +352,17 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 				console.log('fail: '+ data);
 			});	
 			
-			promise6 = CmmAjaxService.select("bas/selectRankRunInfo.do");
+			promise6 = CmmAjaxService.select("bas/selectRankAndonInfo.do");
 			promise6.then(function(data) {
 				try
 				{
-					rankRunInfoList  = data;
+					rankAndonInfoList = data;
 					data = null;
 					promise6 = null;
 				}
 				finally
 				{
-					rankRunInfo();
+					rankAndonInfo();
 				}
 			}, function(data) {
 				//alert('fail: ' + data)
@@ -384,27 +395,57 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 				defectRate = null;
 			}
 		}
-		
-		function rankRunInfo(){
-			//알람 발생량 순위 그리드
-			if (rankRunInfoList !=  null || angular.isUndefined(rankRunInfoList) == false){
-				self.info.alarm.firstTitle = rankRunInfoList["0"].alarmNm;
-				self.info.alarm.firstValue = rankRunInfoList["0"].alarmTm+ "시간 (" + rankRunInfoList["0"].alarmCount + " 번)";
-				self.info.alarm.secondTitle = rankRunInfoList["1"].alarmNm;
-				self.info.alarm.secondValue = rankRunInfoList["1"].alarmTm+ "시간 (" + rankRunInfoList["1"].alarmCount + " 번)";
-				self.info.alarm.thirdTitle = rankRunInfoList["2"].alarmNm;
-				self.info.alarm.thirdValue = rankRunInfoList["2"].alarmTm+ "시간 (" + rankRunInfoList["2"].alarmCount + " 번)";
-				//대기 발생량 순위 그리드
-				self.info.standby.firstTitle = rankRunInfoList["0"].standbysNm;
-				self.info.standby.firstValue = rankRunInfoList["0"].standbyTm+ "시간 (" + rankRunInfoList["0"].standbyCount + " 번)";
-				self.info.standby.secondTitle = rankRunInfoList["1"].standbysNm;
-				self.info.standby.secondValue = rankRunInfoList["1"].standbyTm+ "시간 (" + rankRunInfoList["1"].standbyCount + " 번)";
-				self.info.standby.thirdTitle = rankRunInfoList["2"].standbysNm;
-				self.info.standby.thirdValue = rankRunInfoList["2"].standbyTm+ "시간 (" + rankRunInfoList["2"].standbyCount + " 번)";
-				debugger;
-				//rankRunInfoList = null;
+			
+		function rankAndonInfo(){
+			//품질불량 순위 그리드
+			if (rankAndonInfoList !=  null || rankAndonInfoList!=undefined){
+				
+				
+				//test용 데이터!! andon데이터가 올라올경우 지워야함
+				/*for(i=0; i<rankAndonInfoList.length; i++){
+					rankAndonInfoList[i].qcmBadNm = "test"+i+"Q";
+					rankAndonInfoList[i].qcmBadTm = 10;
+					rankAndonInfoList[i].matMissNm = "test"+i +"S";
+					rankAndonInfoList[i].matMissTm = 10;
+					rankAndonInfoList[i].itemChaNm = "test"+i +"C";
+					rankAndonInfoList[i].itemChaTm = 10;
+				}*/
+				//test용 데이터!!
+				
+				self.info.qcmBad.firstTitle = rankAndonInfoList["0"].qcmBadNm;
+				self.info.qcmBad.firstValue = rankAndonInfoList["0"].qcmBadTm+ "분 (" + rankAndonInfoList["0"].qcmBadCount + " 번)";
+				self.info.qcmBad.secondTitle = rankAndonInfoList["1"].qcmBadNm;
+				self.info.qcmBad.secondValue = rankAndonInfoList["1"].qcmBadTm+ "분 (" + rankAndonInfoList["1"].qcmBadCount + " 번)";
+				self.info.qcmBad.thirdTitle = rankAndonInfoList["2"].qcmBadNm;
+				self.info.qcmBad.thirdValue = rankAndonInfoList["2"].qcmBadTm+ "분 (" + rankAndonInfoList["2"].qcmBadCount + " 번)";
+				//자재결품 순위 그리드
+				self.info.matMiss.firstTitle = rankAndonInfoList["0"].matMissNm;
+				self.info.matMiss.firstValue = rankAndonInfoList["0"].matMissTm+ "분 (" + rankAndonInfoList["0"].matMissCount + " 번)";
+				self.info.matMiss.secondTitle = rankAndonInfoList["1"].matMissNm;
+				self.info.matMiss.secondValue = rankAndonInfoList["1"].matMissTm+ "분 (" + rankAndonInfoList["1"].matMissCount + " 번)";
+				self.info.matMiss.thirdTitle = rankAndonInfoList["2"].matMissNm;
+				self.info.matMiss.thirdValue = rankAndonInfoList["2"].matMissTm+ "분 (" + rankAndonInfoList["2"].matMissCount + " 번)";
+				// 품목교체 순위 그리드
+				self.info.itemCha.firstTitle = rankAndonInfoList["0"].itemChaNm;
+				self.info.itemCha.firstValue = rankAndonInfoList["0"].itemChaTm+ "분 (" + rankAndonInfoList["0"].itemChaCount + " 번)";
+				self.info.itemCha.secondTitle = rankAndonInfoList["1"].itemChaNm;
+				self.info.itemCha.secondValue = rankAndonInfoList["1"].itemChaTm+ "분 (" + rankAndonInfoList["1"].itemChaCount + " 번)";
+				self.info.itemCha.thirdTitle = rankAndonInfoList["2"].itemChaNm;
+				self.info.itemCha.thirdValue = rankAndonInfoList["2"].itemChaTm+ "분 (" + rankAndonInfoList["2"].itemChaCount + " 번)";
+
+				// 재작업
+				/*self.info.itemCha.thirdValue = rankAndonInfoList["2"].reworkTm+ "분 (" + rankAndonInfoList["2"].reworkCount + " 번)";
+				self.info.itemCha.firstTitle = rankAndonInfoList["0"].reworkNm;
+				self.info.itemCha.firstValue = rankAndonInfoList["0"].reworkTm+ "분 (" + rankAndonInfoList["0"].reworkCount + " 번)";
+				self.info.itemCha.secondTitle = rankAndonInfoList["1"].reworkNm;
+				self.info.itemCha.secondValue = rankAndonInfoList["1"].reworkTm+ "분 (" + rankAndonInfoList["1"].reworkCount + " 번)";
+				self.info.itemCha.thirdTitle = rankAndonInfoList["2"].reworkNm;
+				self.info.itemCha.thirdValue = rankAndonInfoList["2"].reworkTm+ "분 (" + rankAndonInfoList["2"].reworkCount + " 번)";
+*/
+				rankAndonInfoList = null;
 			}
 		}	
+
 		/* Desktop Function */
 		// 데스크탑에서만 사용되는 함수 정의
 		function gaugeFunc() {	
@@ -453,63 +494,63 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		
 		}
 		
-		// 알람 발생 추이
-		function alarmDateRunInfo() {
+		// 품질불량 추이 
+		function qcmBadDateAndonInfo() {
 			try
 			{
 				if (test2 ==  null)
-				{			
-					test2 = AmCharts.makeChart("alarmChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateRunInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, 
-						valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, 
-									{ id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], 
-						graphs: [{ id: "g1", valueField: "alarm_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#E74C3C", alphaField: "alpha" },
-							{ id: "g2", valueField: "alarm_tm", type: "line", valueAxis: "a2", lineColor: "#ea9170", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[alarm_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });				
+				{
+					test2 = AmCharts.makeChart("qcmBadChart",{ type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateAndonInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50,gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] },
+						valueAxes: [{ id: "a1", integersOnly: true, title: "", gridAlpha: 0, axisAlpha: 0 }, 
+									{ id: "a2", integersOnly: true, position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}],
+						graphs: [{ id: "g1", valueField: "qcmBadCount", type: "column", fillAlphas: 0.9, valueAxis: "a1", labelOffset: -18, /*labelText: "[[value]] 회",*/ /*balloonText: "[[value]] 번",*/ legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#E74C3C", alphaField: "alpha" },
+								{ id: "g2", valueField: "qcmBadTm", type: "line", valueAxis: "a2",lineColor: "#ea9170", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]분", labelText: "[[qcmBadTm]] 분", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });				
 				}
 				else
 				{
-					test2.dataProvider = dateRunInfoList;
+					test2.dataProvider = dateAndonInfoList;
 					test2.validateData();
 				}
 			}
 			finally{}
 		}
-		//대기발생추이
-		function standbyDateRunInfo() {
+		
+		//대기발생추이 -> 자재결품 추이
+		function matMissDateAndonInfo() {
 			try
 			{
 				if (test3 == null)
 				{
-					test3= AmCharts.makeChart("standbyChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateRunInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, 
-						valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, 
-									{ id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], 
-						graphs: [{ id: "g1", valueField: "standby_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#E74C3C", alphaField: "alpha" },
-							{ id: "g2", valueField: "standby_tm", type: "line", valueAxis: "a2", lineColor: "#ea9170", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[standby_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });				
+					test3 = AmCharts.makeChart("matMissChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider:dateAndonInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, 
+						valueAxes: [{ id: "a1", integersOnly: true, title: "", gridAlpha: 0, axisAlpha: 0 },
+									{ id: "a2", integersOnly: true, position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], 
+						graphs: [{ id: "g1", valueField: "matMissCount", type: "column", fillAlphas: 0.9, valueAxis: "a1", labelOffset: -18, /*labelText: "[[value]] 회",*/ /*balloonText: "[[value]] 번",*/ legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#BDC3C7", alphaField: "alpha" }, 
+								 { id: "g2", valueField: "matMissTm", type: "line", valueAxis: "a2", lineColor: "#f9fcfc", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]분", labelText: "[[matMissTm]] 분", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });
 				}
-	
 				else
 				{
-					test3.dataProvider = dateRunInfoList;
+					test3.dataProvider = dateAndonInfoList;
 					test3.validateData();
 				}
 			}
 			finally{}
 		}
 		
-		//비가동 발생추이 
-		function norunDateRunInfo() {
+		//비가동 발생추이 -> 품목교체추이
+		function itemChaDateAndonInfo() {
 			try
 			{
 				if (test9 == null)
 				{
-					test9 = AmCharts.makeChart("norunChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateRunInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, 
-						valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, 
-									{ id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], 
-						graphs: [{ id: "g1", valueField: "norun_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#E74C3C", alphaField: "alpha" },
-							{ id: "g2", valueField: "norun_tm", type: "line", valueAxis: "a2", lineColor: "#ea9170", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[norun_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });				
+					test9 = AmCharts.makeChart("itemChaChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateAndonInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, 
+						valueAxes: [{ id: "a1", integersOnly: true, title: "", gridAlpha: 0, axisAlpha: 0 }, 
+							{ id: "a2", integersOnly: true, position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], 
+						graphs: [{ id: "g1", valueField: "itemChaCount", type: "column", fillAlphas: 0.9, valueAxis: "a1", labelOffset: -18,/* labelText: "[[value]] 회",*//* balloonText: "[[value]] 번",*/ legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#BDC3C7", alphaField: "alpha" },
+							{ id: "g2", valueField: "itemChaTm", type: "line", valueAxis: "a2", lineColor: "#f9fcfc", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]] 분", labelText: "[[itemChaTm]] 분", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });
 				}
 				else
 				{
-					test9.dataProvider = dateRunInfoList;
+					test9.dataProvider = dateAndonInfoList;
 					test9.validateData();
 				}
 			}
@@ -599,49 +640,49 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 			self.gauge.alarm = self.gaugeRunInfoList["0"].alarmCount + " 라 인";
 		}
 		
-		//알람발생추이
-		function MobileAlarmDateRunInfo() {
+		//품질이상 발생추이
+		function MobileQcmBadDateAndonInfo() {
 			try
 			{
 				if (test6 == null)
 				{
-					test6 = AmCharts.makeChart("MobileAlarmChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateRunInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, { id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], graphs: [{ id: "g1", valueField: "alarm_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#E74C3C", alphaField: "alpha" },{ id: "g2", valueField: "alarm_tm", type: "line", valueAxis: "a2", lineColor: "#ea9170", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[alarm_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });
+					test6 = AmCharts.makeChart("MobileAlarmChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateAndonInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, { id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], graphs: [{ id: "g1", valueField: "alarm_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#E74C3C", alphaField: "alpha" },{ id: "g2", valueField: "qcm_bad_tm", type: "line", valueAxis: "a2", lineColor: "#ea9170", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[alarm_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });
 				}
 				else
 				{
-					test6.dataProvider = dateRunInfoList;
+					test6.dataProvider = dateAndonInfoList
 					test6.validateData();
 				}
 			}
 			finally{}
 		}
-			//대기발생추이
-		function MobileStandbyDateRunInfo() {	
+			//자재결품 발생추이
+		function MobileMatMissDateAndonInfo() {	
 			try
 			{
 				if (test7 == null)
 				{
-					test7 = AmCharts.makeChart("MobileStandbyChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateRunInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, { id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], graphs: [{ id: "g1", valueField: "standby_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#BDC3C7", alphaField: "alpha" },{ id: "g2", valueField: "standby_tm", type: "line", valueAxis: "a2", lineColor: "#f9fcfc", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[alarm_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });
+					test7 = AmCharts.makeChart("MobileMatMissChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateAndonInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, { id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], graphs: [{ id: "g1", valueField: "matMiss_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#BDC3C7", alphaField: "alpha" },{ id: "g2", valueField: "mat_miss_tm", type: "line", valueAxis: "a2", lineColor: "#f9fcfc", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[alarm_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });
 				}
 				else
 				{
-					test7.dataProvider = dateRunInfoList
+					test7.dataProvider = dateAndonInfoList
 					test7.validateData();
 				}
 			}
 			finally{}
 		}
 		//재작업 발생추이
-		function MobileNorunDateRunInfo() {	
+		function MobileMatMissDateAndonInfo() {	
 			try
 			{
 				if (test10 == null)
 				{
-					test10 = AmCharts.makeChart("MobileNorunChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateRunInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, { id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], graphs: [{ id: "g1", valueField: "norun_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#BDC3C7", alphaField: "alpha" },{ id: "g2", valueField: "norun_tm", type: "line", valueAxis: "a2", lineColor: "#f9fcfc", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[alarm_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });
+					test10 = AmCharts.makeChart("MobileMatMissChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateAndonInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, { id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], graphs: [{ id: "g1", valueField: "standby_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#BDC3C7", alphaField: "alpha" },{ id: "g2", valueField: "mat_miss_tm", type: "line", valueAxis: "a2", lineColor: "#f9fcfc", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[alarm_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });
 				}
 				else
 				{
-					test10.dataProvider = dateRunInfoList
+					test10.dataProvider = dateAndonInfoList
 					test10.validateData();
 				}
 			}
