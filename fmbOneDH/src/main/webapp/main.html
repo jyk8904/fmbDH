@@ -165,12 +165,12 @@
 				ng-click='vm.btnFmbMonClick()'>설비가동현황</md-button>
 			<md-button class="md-raised md-default"
 				ng-click='vm.btnFmbTotalClick()'>생산자원종합현황</md-button>	
-			<md-button class="md-raised md-default"
+			<!-- <md-button class="md-raised md-default"
 				ng-click='vm.btnFmbMonAClick()'>설비가동현황A동</md-button>
 			<md-button class="md-raised md-default"
 				ng-click='vm.btnFmbMonBClick()'>설비가동현황B동</md-button>
 			<md-button class="md-raised md-default"
-				ng-click='vm.btnFmbMonDClick()'>설비가동현황D동</md-button>
+				ng-click='vm.btnFmbMonDClick()'>설비가동현황D동</md-button> -->
 			<md-button class="md-raised md-default"
 				ng-click='vm.btnFmbCountClick()'>설비실적현황</md-button>
 			<md-button class="md-raised md-default"
@@ -180,7 +180,7 @@
 			<!-- <md-button class="md-raised md-default"
 				ng-click='vm.btnFmbLinCClick()'>LINE별 생산실적 C동</md-button>	 -->
 			<md-button class="md-raised md-default"
-				ng-click='vm.btnFmbLinDClick()'>LINE별 생산실적 D동</md-button>	
+				ng-click='vm.btnFmbLineDClick()'>LINE별 생산실적 D동</md-button>	
 			<md-button class="md-raised md-default"
 				ng-click='vm.btnFmbTbmClick()'>Tbm</md-button>
 			<md-button class="md-raised md-default"
@@ -217,7 +217,7 @@
 		<p></p>
 	</div>
 	</md-list-item>
-	<md-list-item class="md-2-line" ng-click="vm.btnFmbMonAClick()">
+	<!-- <md-list-item class="md-2-line" ng-click="vm.btnFmbMonAClick()">
 	<div class="md-list-item-text">
 		<h3>설비가동현황A동</h3>
 		<p></p>
@@ -229,18 +229,18 @@
 		<p></p>
 	</div>
 	</md-list-item>
-<!-- 	<md-list-item class="md-2-line" ng-click="vm.btnFmbMonCClick()">
+	<md-list-item class="md-2-line" ng-click="vm.btnFmbMonCClick()">
 	<div class="md-list-item-text">
 		<h3>설비가동현황C동</h3>
 		<p></p>
 	</div>
-	</md-list-item> -->
+	</md-list-item>
 	<md-list-item class="md-2-line" ng-click="vm.btnFmbMonDClick()">
 	<div class="md-list-item-text">
 		<h3>설비가동현황D동</h3>
 		<p></p>
 	</div>
-	</md-list-item>
+	</md-list-item> -->
 	<md-list-item class="md-2-line" ng-click="vm.btnFmbTotalClick()">
 
 	<div class="md-list-item-text">
@@ -253,7 +253,8 @@
 		<h3>LINE별 생산실적 A동</h3>
 		<p></p>
 	</div>
-	</md-list-item> <md-list-item class="md-2-line" ng-click="vm.btnFmbLineBClick()">
+	</md-list-item> 
+	<md-list-item class="md-2-line" ng-click="vm.btnFmbLineBClick()">
 	<div class="md-list-item-text">
 		<h3>LINE별 생산실적 B동</h3>
 		<p></p>
@@ -383,11 +384,11 @@
 <script src="modules/cmm/directives/cmmFormDrtv.js"></script>
 
 <!-- FMB 관리 -->
-<script src="modules/fmb/controllers/fmbMonCtrl.js"></script>
+<script src="modules/fmb/controllers/fmbMonCtrl.js"></script><!-- 
 <script src="modules/fmb/controllers/fmbMonACtrl.js"></script>
 <script src="modules/fmb/controllers/fmbMonBCtrl.js"></script>
 <script src="modules/fmb/controllers/fmbMonCCtrl.js"></script>
-<script src="modules/fmb/controllers/fmbMonDCtrl.js"></script>
+<script src="modules/fmb/controllers/fmbMonDCtrl.js"></script> -->
 <script src="modules/fmb/controllers/fmbTotalCtrl.js"></script>
 <script src="modules/fmb/controllers/fmbCountCtrl.js"></script>
 <script src="modules/fmb/controllers/fmbLineACtrl.js"></script>

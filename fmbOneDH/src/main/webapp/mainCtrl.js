@@ -103,10 +103,10 @@ angular
 
 	self.vo = { PLC_ID: 'PLC-001' }
 	self.btnFmbMonClick = btnFmbMonClickHandler;
-	self.btnFmbMonAClick = btnFmbMonAClickHandler;
+	/*self.btnFmbMonAClick = btnFmbMonAClickHandler;
 	self.btnFmbMonBClick = btnFmbMonBClickHandler;
-	/*self.btnFmbMonCClick = btnFmbMonCClickHandler;*/
-	self.btnFmbMonDClick = btnFmbMonDClickHandler;
+	self.btnFmbMonCClick = btnFmbMonCClickHandler;
+	self.btnFmbMonDClick = btnFmbMonDClickHandler;*/
 	self.btnFmbTotalClick = btnFmbTotalClickHandler;
 	self.btnFmbCountClick = btnFmbCountClickHandler;
 	self.btnFmbLineAClick = btnFmbLineAClickHandler;
@@ -138,10 +138,10 @@ angular
 	   	}
     //전환될 페이지 리스트
 	var pageList = [{ "pageNm": "FmbMon", 		"pageNmKr": "설비 가동현황"		}
-				  , { "pageNm": "FmbMonA", 		"pageNmKr": "설비 가동현황 A동"	}
+				 /* , { "pageNm": "FmbMonA", 		"pageNmKr": "설비 가동현황 A동"	}
 				  , { "pageNm": "FmbMonB", 		"pageNmKr": "설비 가동현황 B동"	}
-				  /*, { "pageNm": "FmbMonC", 		"pageNmKr": "설비 가동현황 C동"	}*/
-				  , { "pageNm": "FmbMonD", 		"pageNmKr": "설비 가동현황 D동"	}
+				  , { "pageNm": "FmbMonC", 		"pageNmKr": "설비 가동현황 C동"	}
+				  , { "pageNm": "FmbMonD", 		"pageNmKr": "설비 가동현황 D동"	}*/
 			      , { "pageNm": "FmbTotal", 	"pageNmKr": "생산자원 종합현황"	}
 			      , { "pageNm": "FmbCount", 	"pageNmKr": "설비 실적현황"		}
 			      , { "pageNm": "FmbLineA", 	"pageNmKr": "LINE별 생산실적 A동"}
@@ -315,7 +315,7 @@ angular
    function btnFmbMonClickHandler() {
          $location.url('/FmbMon');
       }
-   function btnFmbMonAClickHandler() {
+  /* function btnFmbMonAClickHandler() {
        $location.url('/FmbMonA');
     }
    function btnFmbMonBClickHandler() {
@@ -326,7 +326,7 @@ angular
     }
    function btnFmbMonDClickHandler() {
        $location.url('/FmbMonD');
-    }
+    }*/
    function btnFmbLineAClickHandler() {
        $location.url('/FmbLineA');
     }

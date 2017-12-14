@@ -1,6 +1,6 @@
 /**  
- * @Class Name : fmbLinACtrl.js
- * @Description : fmbLineA
+ * @Class Name : fmbLinDCtrl.js
+ * @Description : fmbLineD
  * @Modification Information  
  * @
  * @ 작업일       작성자      내용
@@ -24,7 +24,7 @@ angular
 	    
     var self = this;
     var workerList = CmmWorkerSrvc;
-    var fact_id = "C";
+    var fact_id = "D";
     var promise = null;
     var length = null;
     var dangle = null;

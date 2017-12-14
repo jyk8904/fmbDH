@@ -17,7 +17,7 @@
 <!-- ngview 내부 페이지 -->
 <div test-ctrl class='bc-screen' style="margin:0">
 <!-- ngview 내부 header -->
-<bc-form-header logo='assets/img/system/logo.png' title="LINE별 생산실적  A동(UPH 기반)" is-mobile="isMobile" style="display:flex; align-items:center; flex-wrap: wrap;">
+<bc-form-header logo='assets/img/system/logo.png' title="LINE별 생산실적  D동(UPH 기반)" is-mobile="isMobile" style="display:flex; align-items:center; flex-wrap: wrap;">
 </bc-form-header>	
 
 
@@ -75,7 +75,7 @@
 		    {{line.dtRate|number:1}}
 		  </div>
 		    <div ng-switch on="line.eqptSts" >
-				<img ng-switch-when="0" class="obj lineBtn" src="assets/img/button/Red25.png" align="center">
+				<img ng-switch-when="0" class="obj lineBtn" src="assets/img/button/Yellow25.png" align="center">
 				<img ng-switch-when="1" class="obj lineBtn" src="assets/img/button/Green25.png" align="center">
 				<img ng-switch-when="2" class="obj lineBtn" src="assets/img/button/White25.png" align="center">
 				<img ng-switch-when="3" class="obj lineBtn" src="assets/img/button/Blue25.png" align="center">

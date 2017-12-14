@@ -216,16 +216,18 @@ angular
     		template: "<div ng-transclude></div>"
     	}
     })
-     .directive('bcLegend', function() {  /* 헤더 우측 내용 */
+
+    .directive('bcLegend', function() {  /* 헤더 우측 내용 */
     	return {
     		restrict: 'E',
     		transclude: true,  
-    		template: "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12' style='margin-top:50px;'" +
+    		template: "<div class='col-lg-11 col-md-12 col-sm-12 col-xs-12' style='margin-top:18px; float:right; padding-right : 0px;'" +
     				  "<div ng-if='!isMobile' class='lineInfo' ng-transclude></div>"+
     				  "<div ng-if='isMobile' class='lineInfoMobile' ng-transclude></div>"+
 	    				"</div>"
     	}
     })
+
 
 /*    .directive('bcHeaderLabel', function() {   폼 좌측 상단 타이틀 
     	return {

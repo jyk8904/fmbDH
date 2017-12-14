@@ -372,14 +372,18 @@ div[ng-view] {
   margin-bottom: 0px;
   padding: 30px 0 0 0;
 }
-.lineInfo{
-	margin-top:70px;
-	color:white;
+.lineInfo {
+	margin-top: 52px;
+	padding-right : 0 ;
+	color: white;
 	font-size: 25px;
-
-} 
-.legend{
-	margin-top:40px;
+	text-align: right;
+	margin-left: 60px;
+}
+.legend {
+	height: 80px;
+	padding-right: 0;
+	float: right;
 }
 
 .logo{
@@ -515,7 +519,7 @@ color:yellow;
 	height:900px;
 	margin: 0 20px 0 20px;
 }
-.title{float: left}
+.title{float: right;}
 
 .colList{float: left;}
 .col{
