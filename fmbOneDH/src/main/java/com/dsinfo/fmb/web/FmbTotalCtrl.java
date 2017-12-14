@@ -98,25 +98,42 @@ public class FmbTotalCtrl {
 	}
     
     
-    //대시보드 날짜별 가동추이
+    //대시보드 가동순위
     @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/bas/selectDashDateRunInfo.do", method = RequestMethod.POST)
-	public ResponseEntity<List<FmbDateRunInfoVO>> selectDashDateRunInfo()  {
-    	System.out.println("selectDashDateRunInfo.do로 이동 ");
-		List<FmbDateRunInfoVO> fmbDateRunInfoVO = null;
+    @RequestMapping(value = "/bas/selectRankRunInfo.do", method = RequestMethod.POST)
+	public ResponseEntity<List<FmbRankRunInfoVO>> selectRankRunInfo()  {
+    	System.out.println("selectRankRunInfo~~~~~~~~~~~~~~!!!!!!!!!!!");
+		List<FmbRankRunInfoVO> fmbRankRunInfoVO = null;
+		System.out.println("selectRankRunInfo로 이동");
 		try {
-			fmbDateRunInfoVO = (List<FmbDateRunInfoVO>) mBcfBizService.selectAll("sql-bas-info.selectDashDateRunInfo");
-			System.out.println(fmbDateRunInfoVO.get(0));
-			log.info("!!!!!");
+			fmbRankRunInfoVO = (List<FmbRankRunInfoVO>) mBcfBizService.selectAll("sql-bas-info.selectRankRunInfo");
+			log.info("success");
 			log.error("fail");
-			return new ResponseEntity<List<FmbDateRunInfoVO>>(fmbDateRunInfoVO, HttpStatus.OK);
+			return new ResponseEntity<List<FmbRankRunInfoVO>>(fmbRankRunInfoVO, HttpStatus.OK);
 		} catch (Exception ie) {
-			log.error("FmbTotalController:selectFmbRunInfo=>" +  ie.toString());
-			return new ResponseEntity<List<FmbDateRunInfoVO>>(fmbDateRunInfoVO, HttpStatus.OK);
+			log.error("FmbTotalController:selectRankAndonInfo=>" +  ie.toString());
+			return new ResponseEntity<List<FmbRankRunInfoVO>>(fmbRankRunInfoVO, HttpStatus.OK);
 		}
 	}
 
     
+    //대시보드 날짜별 가동추이
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "/bas/selectDashDateRunInfo.do", method = RequestMethod.POST)
+	public ResponseEntity<List<FmbDateRunInfoVO>> selectDashDateRunInfo()  {
+    	
+    	System.out.println("dashdateruninfo로 왔음");
+		List<FmbDateRunInfoVO> fmbDateRunInfoVO = null;
+		try {
+			fmbDateRunInfoVO = (List<FmbDateRunInfoVO>) mBcfBizService.selectAll("sql-bas-info.selectDashDateRunInfo");
+			log.info("success");
+			log.error("fail");
+			return new ResponseEntity<List<FmbDateRunInfoVO>>(fmbDateRunInfoVO, HttpStatus.OK);
+		} catch (Exception ie) {
+			log.error("FmbTotalController:selectDateAndonInfol=>" +  ie.toString());
+			return new ResponseEntity<List<FmbDateRunInfoVO>>(fmbDateRunInfoVO, HttpStatus.OK);
+		}
+	}
 
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/bas/selectFmbDefectChart.do", method = RequestMethod.POST)

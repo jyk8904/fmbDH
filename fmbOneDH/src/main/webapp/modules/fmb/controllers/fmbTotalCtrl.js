@@ -67,6 +67,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		
 		$scope.isMobile = false;
 		// 변수 선언 및 디폴트 값 세팅 
+		var rankRunInfoList = {};
 		var dateRunInfoList = {};
 		var planProgressList = {};
 		var defectChart = {};
@@ -254,7 +255,6 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					try
 					{
 						self.gaugeRunInfoList = data;
-						console.log(self.gaugeRunInfoList)
 						data = null;
 						promise4 = null;
 					}
@@ -265,6 +265,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					//alert('fail: ' + data)
 					console.log('fail: '+ data);
 				});
+				//dashdateruninfo
 				promise5 = CmmAjaxService.select("bas/selectDashDateRunInfo.do");
 				promise5.then(function(data) {
 					try
@@ -297,7 +298,6 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					try
 					{
 						planProgressList = data;
-						console.log(data)
 						data = null;
 						promise7 = null;
 					}
@@ -320,6 +320,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		
 		function thirdDataCall()
 		{
+			console.log("thirdDataCall")
 			promise3 = CmmAjaxService.select("bas/selectGaugeRunRate.do");
 			promise3.then(function(data) {
 				try
@@ -340,9 +341,10 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 				//alert('fail: ' + data)
 				console.log('fail: '+ data);
 			});	
-			
+			//순위구하기
 			promise6 = CmmAjaxService.select("bas/selectRankRunInfo.do");
 			promise6.then(function(data) {
+				console.log(data)
 				try
 				{
 					rankRunInfoList  = data;
@@ -401,8 +403,15 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 				self.info.standby.secondValue = rankRunInfoList["1"].standbyTm+ "시간 (" + rankRunInfoList["1"].standbyCount + " 번)";
 				self.info.standby.thirdTitle = rankRunInfoList["2"].standbysNm;
 				self.info.standby.thirdValue = rankRunInfoList["2"].standbyTm+ "시간 (" + rankRunInfoList["2"].standbyCount + " 번)";
-				debugger;
-				//rankRunInfoList = null;
+				//비가동 발생량 순위 그리드
+				self.info.norun.firstTitle = rankRunInfoList["0"].noRunNm;
+				self.info.norun.firstValue = rankRunInfoList["0"].noRunTm+ "시간 (" + rankRunInfoList["0"].noRunCount + " 번)";
+				self.info.norun.secondTitle = rankRunInfoList["1"].noRunNm;
+				self.info.norun.secondValue = rankRunInfoList["1"].noRunTm+ "시간 (" + rankRunInfoList["1"].noRunCount + " 번)";
+				self.info.norun.thirdTitle = rankRunInfoList["2"].noRunNm;
+				self.info.norun.thirdValue = rankRunInfoList["2"].noRunTm+ "시간 (" + rankRunInfoList["2"].noRunCount + " 번)";
+				
+				rankRunInfoList = null;
 			}
 		}	
 		/* Desktop Function */
@@ -482,8 +491,8 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					test3= AmCharts.makeChart("standbyChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateRunInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, 
 						valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, 
 									{ id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], 
-						graphs: [{ id: "g1", valueField: "standby_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#E74C3C", alphaField: "alpha" },
-							{ id: "g2", valueField: "standby_tm", type: "line", valueAxis: "a2", lineColor: "#ea9170", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[standby_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });				
+						graphs: [{ id: "g1", valueField: "standby_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#F9FCFC", alphaField: "alpha" },
+							{ id: "g2", valueField: "standby_tm", type: "line", valueAxis: "a2", lineColor: "#F9FCFC", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[standby_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });				
 				}
 	
 				else
@@ -504,8 +513,8 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					test9 = AmCharts.makeChart("norunChart", { type: "serial", theme: "dark", dataDateFormat: "YYYYMMDD", dataProvider: dateRunInfoList, addClassNames: true, color: "#FFFFFF", marginLeft: 0, categoryField: "dt", categoryAxis: { parseDates: true, minPeriod: "DD", autoGridCount: false, gridCount: 50, gridAlpha: 0.1, gridColor: "#FFFFFF", axisColor: "#555555", dateFormats: [{ period: 'DD', format: 'DD' }, { period: 'WW', format: 'MMM DD' }, { period: 'MM', format: 'MMM' }, { period: 'YYYY', format: 'YYYY'}] }, 
 						valueAxes: [{ id: "a1", title: "", gridAlpha: 0, axisAlpha: 0 }, 
 									{ id: "a2", position: "right", gridAlpha: 0, axisAlpha: 0, labelsEnabled: false}], 
-						graphs: [{ id: "g1", valueField: "norun_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#E74C3C", alphaField: "alpha" },
-							{ id: "g2", valueField: "norun_tm", type: "line", valueAxis: "a2", lineColor: "#ea9170", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[norun_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });				
+						graphs: [{ id: "g1", valueField: "norun_count", type: "column", fillAlphas: 0.9, valueAxis: "a1", balloonText: "[[value]] 번", legendValueText: "[[value]] Count", legendPeriodValueText: "total: [[value.sum]] Count", lineColor: "#DDC71F", alphaField: "alpha" },
+							{ id: "g2", valueField: "norun_tm", type: "line", valueAxis: "a2", lineColor: "#FFF000", bullet: "round", bulletSize: 11, lineThickness: 3, legendValueText: "[[description]]/[[value]]", labelText: "[[norun_tm]]", labelPosition: "right", balloonText: "Time:[[value]]", showBalloon: true, animationPlayed: true}], chartCursor: { zoomable: false, categoryBalloonDateFormat: "DD", cursorAlpha: 0, valueBalloonsEnabled: false} });				
 				}
 				else
 				{
