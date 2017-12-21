@@ -139,11 +139,16 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		function MobileGetData()
 		{
 			firstDataCall();
+			
 		}
 				
 		function splitPlanProgress() {
 			firstFlag = true;
-			count = 3;														// 다량의 데이터를 나눠 보여줄 횟수
+			if($scope.isMobile){
+			count = 8;										// 다량의 데이터를 나눠 보여줄 횟수
+			}else{
+				count = 3;	
+			}
 			quotient = parseInt(planProgressList.length /count); 	// 몫: 한번에 보여줄 데이터 갯수
 			remainder = planProgressList.length % quotient;			// 나머지
 			startRan =0;													// 한번에 보여줄 데이터의 첫번째 num
@@ -207,6 +212,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 			promise1.then(function(data) {
 				try 
 				{
+					console.log(data)
 					defectRankList = data;
 					data = null;
 					promise1 = null;
@@ -214,7 +220,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 				finally
 				{
 					if ($scope.isMobile) {
-					MobileBarChart
+					MobileBarChart();
 					}else{
 						barChart();
 					}
@@ -661,11 +667,11 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 			{
 				if (defectPie == null)
 				{
-					defectPie = AmCharts.makeChart("MobilePieChart",{"type": "pie","angle": 46,"pullOutRadius": "5%","balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]회</b> ([[percents]]%)</span>","depth3D": 30,"labelRadius": -70,"marginBottom": 0,"marginTop": 0,"startRadius": "100%","startDuration": 0,"sequencedAnimation": false,"titleField": "defectNm","valueField": "defectCount","theme": "dark","allLabels": [],"balloon": {},"titles": [],"dataProvider": defectChart});
+					defectPie = AmCharts.makeChart("MobilePieChart",{"type": "pie","angle": 46,"pullOutRadius": "5%","balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]회</b> ([[percents]]%)</span>","depth3D": 30,"labelRadius": -20,"marginBottom": 0,"marginTop": 0,"startRadius": "100%","startDuration": 0,"sequencedAnimation": false,"titleField": "defectNm","valueField": "defectCount","theme": "dark","allLabels": [],"balloon": {},"titles": [],"dataProvider": defectChart});
 				}
 				else
 				{
-					defectPie.dataProvider = defectChart
+					defectPie.dataProvider = defectChart;
 					defectPie.validateData();
 				}
 			}
@@ -675,13 +681,15 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		function MobileBarChart() {
 			try
 			{
+				console.log("히힣")
+				console.log(defectRankList)
 				if (defectBar == null)
 				{
 					defectBar = AmCharts.makeChart("MobileBarChart",{"type": "serial","categoryField": "rankNum","angle": 20,"depth3D": 30,"sequencedAnimation": false,"startDuration": 0,"startEffect": "easeOutSine","fontSize": 12,"plotAreaBorderAlpha": 0,"plotAreaBorderColor": "#008000","plotAreaFillAlphas": 0,"backgroundColor": "#E7E7E7","borderColor": "#E7E7E7","categoryAxis": {"gridPosition": "start","gridColor": "#E5E5E5","color": "#E7E7E7","labelFunction": function(rankNum){return rankNum + "순위"}},"trendLines": [],"graphs": [{"balloonText": "[[category]] 순위:[[itemNm]] ([[value]] 개)","fillAlphas": 1,"fillColors": "#DD4635","id": "AmGraph-1","lineAlpha": 0,"lineColor": "#FFFFFF","title": "graph 1","type": "column","valueField": "rankCount"}],"guides": [],"valueAxes": [{"id": "rankCount","title": "","gridColor": "#E5E5E5","color": "#E7E7E7"}],"allLabels": [],"balloon": {},"legend": {"enabled": false,"useGraphSettings": true},"dataProvider": defectRankList})
 				}
 				else
 				{
-					defectBar.dataProvider = defectRankList
+					defectBar.dataProvider = defectRankList;
 					defectBar.validateData();
 				}
 			}

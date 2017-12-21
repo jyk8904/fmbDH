@@ -3,13 +3,21 @@
 
 /* smart Phone (portrait and landscape) */
 @media screen and (max-width: 768px) {
-	
+
 	/* 메인 타이틀 */
 	.titleHeader {
-		height: 45px;
-		margin-bottom: 1%;
+		margin: 1% 0 1% 0;
 	}
-	
+	.title{
+		float : left;
+	}
+	.headertitle{
+	padding-left: 3%;
+	letter-spacing: -1px;
+	}
+	.left-header{
+	max-width: 323px;
+	}
 	/* 로그인 */
 	.loginId {
 		top: 50%;
@@ -41,7 +49,12 @@
 	.sideNavLst{
 		height:93%;
 	}
-	
+	.md-primary{
+		max-width: 60px;
+	}
+	.md-button.md-raised:not([disabled]){
+		box-shadow : none;
+	}
 	.md-2-line, .md-2-line>.md-no-style{
 		height:12% !important;
 		min-height: 20px !important;
@@ -52,7 +65,8 @@
 		height:100% !important;
 	}
 	.md-button{
-		overflow: visible;		
+		overflow: visible;
+		wh		
 	}
 	/* 설비정보 팝업 */
 	.eqptPopupTitle {
@@ -65,7 +79,252 @@
 	.subTitle p {
 		margin: 5px 0 0 5px;
 	}
+
+	/* 대쉬보드 */
+	.chartTitle {
+		font-size: 12px;
+		width: 57%;
+	}
+	.gridArea3 .gaugeTitleBox p {
+		font-size: 16px;
+	}
+	.gridArea3 .gaugeValueBox p {
+		font-size: 16px;
+	}
+	.gridArea4 .titleBox {
+		padding:0;
+	} 
+	.gridArea4 .valueBox {
+		padding:0;
+	}
+	.smallBox {
+		min-height: 320px;
+	}
+	.largeBox {
+		min-height: 0;
+	}
+	.gridArea {
+	height: 82%;
+    /* margin-left: 0%; */
+    max-width: 44%;
+    padding: 0;
+    float: right;	
+	}
+	.gridArea p {
+		margin: 0;
+		font-size:11.6px;
+		letter-spacing:-1px;
+	}
+	.gridArea1 {
+		height: 72%;
+		margin-top: 5%;
+		margin-bottom: 4%;
+		
+	}
+	.gridArea1 .titleRow {
+		height: 16%;
+		padding:0;
+	}
+	.gridArea1 > .contentRow {
+		height: 14%;
+		padding:0;
+	}
+	.gridArea2 {
+		height: 15%;
+		margin-bottom: 4%;
+		bottom: -54px;
+	}
+	.gridArea2 .ppmTitle {
+		height: 100%;
+		padding:0 5px;
+	}
+	.gridArea2 .ppmValue {
+		height: 100%;
+	}
+	#MobileGauge {
+		height: 150px;
+		margin: 10px 0 -20px 0;s
+	}
+	#MobileNorunChart, #MobileStandbyChart, #MobileAlarmChart{
+		height: 150px;
+		margin-top: 11%;
+    margin-bottom: -9%;
+	}
 	
+	#MoboilePieChart{
+	
+    background-color: transparent;
+    overflow: hidden;
+    text-align: left;
+	}
+	#MobileBarChart{
+	 
+    background-color: transparent;
+    margin-left: -7%;
+    margin-top: -5%;
+    
+	}
+	.gridArea3 {
+		height: 45%;
+		bottom: -54px;
+	}
+	.gridArea3 .gaugeT{
+		width: 48%;
+		height: 21%;
+		margin-right: 2%;/* 
+		margin-bottom: 2%; */
+		padding:0;
+	}
+	.gridArea3 .gaugeValueBox {
+		width: 48%;
+		height: 21%;
+		margin-right: 2%;
+		/* margin-bottom: 2%; */
+		padding:0;
+	}
+	.gridArea4 {
+		height: 45%;
+		bottom: -54px;
+	}
+	.gridArea4 p {
+		font-size: 10px;
+	}
+	/* 라인별 생산실적 */
+	.lineBtn {
+		width: 20px;
+		height: 20px;
+	}
+	.lineBtnMd {
+		width: 15px;
+		height: 15px;
+	}
+	.lineBtnSm {
+		width: 10px;
+		height: 10px;
+	}
+	/* 생산실적 외 모니터링  */
+	.buttonArea {
+    margin: -5% 6% 1.5% 6%;
+	}
+	.buttonArea> .md-button{
+	min-height:20px; 
+	min-width:55px;
+	line-height:25px;
+	font-size:10%;
+	}
+	.prodTable {
+	/* height:240px; */
+	/* 
+    min-height: 240px;
+    max-height: 500px; */
+	}
+	
+	.lineInfoMobile > .lineInfo{
+	margin-top: 6%;
+    margin-left: -6%;
+    /* margin-right: 2px; */
+    color: white;
+    font-size: 12px;
+    letter-spacing: -1px;
+    padding: 0;
+    text-align: left;
+    min-width: 59%;
+	} 
+	.legend{
+	    z-index: 20000;
+    background-image: url(../../assets/img/system/legend5.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 44px;
+    padding-right: 0;
+    padding: 0;
+    background-position: 0;
+    float: right;
+    max-width: 42%;
+	
+	}
+	.andonbtn {
+	width: 27%
+	}
+	div[class^=andon] {
+		line-height:0px;
+	}
+}
+/* iPhoneX (portrait and landscape) */
+@media screen and (min-width : 768px) and (max-width : 980px) {
+	
+	/* 메인 타이틀 */
+	.titleHeader {
+		margin: 1% 0 1% 0;
+	}
+	.title{
+		float : left;
+	}
+	.left-header{
+	max-width: 323px;
+	}
+	/* 로그인 */
+	.loginId {
+		top: 50%;
+		left: 61%;
+	}
+	.loginPwd {
+		top: 66%;
+		left: 61%;
+	}
+	.loginBtn {
+		width: 128px;
+		height: 21px;
+		top: 80%;
+		left: 76%;
+	}
+	.autoLogin {
+		display: none;
+	}
+	
+	/* 사이드메뉴바 */
+	
+	.md-sidenav{
+		width:32%;
+	}
+	.sideNavCtnt{
+		overflow : hidden;
+	    height: 84% ;
+	}
+	.sideNavLst{
+		height:93%;
+	}
+	.md-primary{
+		max-width: 60px;
+	}
+	.md-button.md-raised:not([disabled]){
+		box-shadow : none;
+	}
+	.md-2-line, .md-2-line>.md-no-style{
+		height:12% !important;
+		min-height: 20px !important;
+		max-height: 70px !important;
+	}
+	
+	.md-2-line>.md-no-style{
+		height:100% !important;
+	}
+	.md-button{
+		overflow: visible;
+		wh		
+	}
+	/* 설비정보 팝업 */
+	.eqptPopupTitle {
+		min-height:25px;
+		height: 25px;
+	}
+	.subTitle {
+		margin-top: 10px;
+	}
+	.subTitle p {
+		margin: 5px 0 0 5px;
+	}
+
 	/* 대쉬보드 */
 	.chartTitle {
 		font-size: 12px;
@@ -83,7 +342,7 @@
 		padding:0;
 	}
 	.smallBox {
-		min-height: 0;
+		min-height: 320px;
 	}
 	.largeBox {
 		min-height: 0;
@@ -93,7 +352,7 @@
 	}
 	.gridArea p {
 		margin: 0;
-		font-size:11px;
+		font-size:11.6px;
 		letter-spacing:-1px;
 	}
 	.gridArea1 {
@@ -183,12 +442,29 @@
 	}
 	
 	.lineInfoMobile > .lineInfo{
-	margin-top:63px;
-	color:white;
-	font-size: 12px;
-	letter-spacing:-1px;
+	    margin-top: 6%;
+    margin-left: -3%;
+    /* margin-right: 2px; */
+    color: white;
+    font-size: 12px;
+    letter-spacing: -1px;
+    max-width: 57%;
+    padding: 0;
+    text-align: left;
 	} 
+	.legend{
+	    z-index: 20000;
+    background-image: url(../../assets/img/system/legend5.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 44px;
+    padding-right: 0;
+    padding: 0;
+    background-position: 0;
+    float: right;
+    max-width: 42%;
 	
+	}
 	.andonbtn {
 	width: 27%
 	}
@@ -201,19 +477,30 @@
 
 
 /* iPads (portrait and landscape) */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+@media only screen and (min-device-width : 1020px) and (max-device-width : 1366px) {
     /* Styles */
     
     /* 대쉬보드 */
     /* 메인 타이틀 */
 	.titleHeader {
-		margin-bottom: 1%;
+	margin: 1% 0 1% 0;
+	}
+	.title{
+		float : left;
+		    font-size: 24px;
+		
+	}
+	.headertitle{
+	padding-left: 8%;
+	}
+	.left-header{
+	max-width: 323px;
 	}
     .chartTitle{
     	font-size: 16px;
     }
 	.smallBox {
-		min-height: 305px;
+		min-height: 320px;
 	}
 	.largeBox {
 		min-height: 305px;
@@ -255,12 +542,12 @@
 	}
 	#MobileGauge {
 	    height: 323px;
-    	margin: 20px 0 -30px 0;
+    	margin: 11% 0 26% 0
 	}
 	
 	#MobileNorunChart, #MobileStandbyChart, #MobileAlarmChart{
 	    height: 300px;
-    	margin: 0px 0 0px 0;
+    	margin: 16% 0 30% 0;
 	}
 	
 	.gridArea3 {
@@ -320,5 +607,29 @@
 	.lineBtnSm {
 		width: 10px;
 		height: 10px;
+	}
+	.lineInfoMobile > .lineInfo{
+	margin-top: 4%;
+    margin-left: 14%;
+    /* margin-right: 2px; */
+    color: white;
+    font-size: 16px;
+    letter-spacing: -1px;
+    max-width: 51%;
+    padding: 0;
+    text-align: left;
+	} 
+	.legend{
+	z-index: 20000;
+    background-image: url(../../assets/img/system/legend5.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 44px;
+    padding-right: 0;
+    padding: 0;
+    background-position: 0;
+    float: right;
+    max-width: 29%;
+	
 	}
 }

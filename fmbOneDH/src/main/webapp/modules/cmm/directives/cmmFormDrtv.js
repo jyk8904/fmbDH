@@ -185,12 +185,12 @@ angular
     		transclude: true,  
     		template: "<div test-ctrl2 class='titleHeader col-md-12 col-sm-12 col-xs-12'>" +
 	    				'<img ng-if="!isMobile" class ="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="padding:1.8%;"src="assets/img/system/logo.png" />' +
-    					'<img ng-if="isMobile" class ="col-lg-1 col-md-1 col-sm-1 col-xs-2" ng-click="onSwipeRight()" src="assets/img/system/logo.png" />' +
+    					'<img ng-if="isMobile" class ="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-left:7px; padding-right:0px;" ng-click="onSwipeRight()" src="assets/img/system/logo.png" />' +
     					
     					'<div  ng-if="!isMobile" class="col-md-4 col-sm-5 col-xs-5 col-lg-offset-1"><h1 class="title" style="color: white; font-family:noteSansBlack; font-size:40px;;">{{title}}</h1></div>'+
-    					'<div ng-if="isMobile" class="col-md-4 col-sm-4 col-xs-5 col-lg-offset-2"><h4 class="title" style="color: white;">{{title}}</h4></div>'+
+    					'<div ng-if="isMobile" class="col-md-5 col-sm-5 col-xs-5 col-lg-offset-2 headertitle" style="max-width: 42%;;padding-right : 0px;"><h4 class="title" style="color: white;">{{title}}</h4></div>'+
 
-    					"<div class='col-lg-6 col-md-6 col-sm-7 col-xs-7' style='font-size:18px; padding:10px' ng-transclude></div>"	+
+    					"<div class='col-lg-6 col-md-6 col-sm-7 col-xs-7' style='font-size:18px; padding:0px;max-width: 49%;}' ng-transclude></div>"	+
     				  
     					"</div>",
     				 /* col-lg-offset-1*/
@@ -221,7 +221,7 @@ angular
     	return {
     		restrict: 'E',
     		transclude: true,  
-    		template: "<div class='col-lg-11 col-md-12 col-sm-12 col-xs-12' style='margin-top:18px; float:right; padding-right : 0px;'" +
+    		template: "<div class='col-lg-11 col-md-12 col-sm-12 col-xs-12 left-header' style='margin-top:18px; float:right; padding-right : 0px;'" +
     				  "<div ng-if='!isMobile' class='lineInfo' ng-transclude></div>"+
     				  "<div ng-if='isMobile' class='lineInfoMobile' ng-transclude></div>"+
 	    				"</div>"

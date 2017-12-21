@@ -73,7 +73,6 @@ Make it move
     0%   { text-indent: 1920px }
     100% { text-indent: -1920px }
 } */
-
 .mouse-over-bar {
 	padding:20px 20px; 
 	transition: left 0.3s;
@@ -82,7 +81,7 @@ Make it move
 	left: -175px;
 	z-index: 1001; /* swipe가 1000, swipe위에 있어야하기때문에 1001 */
 	height: 97%;
-	width: 200px;
+	width: 183px;
 	background-color: #d4d8e2;
 	border-right: 25px solid #0f2f56;
 	border-radius: 0 60px 60px 0px;
@@ -326,9 +325,6 @@ div[ng-view] {
 
 }
 
-.md-raised{
-	margin: 6px 0px;
-}
 /* 화면 내부 폼. 화면 당 1개 이상 폼으로 구성됨 
    bc-form
        -- bc-form-header
@@ -384,6 +380,11 @@ div[ng-view] {
 	height: 80px;
 	padding-right: 0;
 	float: right;
+	background-position: 33px;
+	z-index:20000; 
+    background-image : url('../../assets/img/system/legend5.png');
+    background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .logo{
