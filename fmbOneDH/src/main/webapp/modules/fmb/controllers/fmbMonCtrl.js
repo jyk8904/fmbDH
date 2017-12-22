@@ -50,7 +50,7 @@ angular
 
     							    
     var self = this;
-
+    
     var workerList = CmmWorkerSrvc;
     var promise = null;
     var bgImagePromise = null;
@@ -81,8 +81,7 @@ angular
     						, id 		: ''
     						, eqptCnm   : ''
 			    			}
-
-
+    
     //plc parameter
 	self.plcParamVo={};
 	self.plcParamVo.plcId ='';
@@ -230,7 +229,7 @@ angular
     $scope.hide = function() {
     	$mdDialog.hide();
     };
-     
+   
     //팝업클릭
     $scope.showAdvanced = function(id,ev) {
     	//PlC 데이터 저장 하는 부분.

@@ -30,6 +30,8 @@
 <title>FMB System</title>
 
 <!-- JQUERY -->
+
+
 <script src="assets/js/jquery/jquery-2.0.3.min.js"></script>
 <script src="assets/js/jquery/jquery-ui.js"></script>
 <!--     <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>	
@@ -127,6 +129,9 @@
 <!-- startup Page -->
 <link rel="touch-startup-image" href="assets/img/ico/startup.png">
 <link rel="apple-touch-startup-image" href="assets/img/ico/startup.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 
@@ -289,12 +294,6 @@
 		<p></p>
 	</div>
 	</md-list-item>
-	<md-list-item class="md-2-line" ng-click="vm.btnFmbModeClick()" ng-if="vm.id=='admin'||vm.id=='ADMIN' || vm.id=='yc'|| vm.id=='YC'">
-	<div class="md-list-item-text">
-		<h3>개발모드</h3>
-		<p></p>
-	</div>
-	</md-list-item>
 	</md-list> 
 	</md-content> 
 	</md-sidenav>
@@ -303,7 +302,7 @@
 	<div
 		style="background-image: url('assets/img/bg/login-2.png'); background-size: cover; background-repeat: no-repeat; width: 100%; height: 100%; z-index: 10000; position: fixed;"
 		ng-if="!loginChk">
-
+		
 		<md-input-container class="md-warn loginId" flex-gt-sm>
 		<label style="color: white;">ID</label> <input ng-model="vm.id"
 			style="color: white;"> </md-input-container>
@@ -344,7 +343,7 @@
 	<!-- 모달 body --> 
 	<modal id="pageSetting" title="페이지 전환 설정"	 visible="vm.showModal">
 	<form name="settingForm">
-		<table style="margin-left: 35px;">
+		<table>
 			<tr>
 				<td></td>
 				<td>데이터갱신(초)</td>
@@ -373,7 +372,7 @@
 
 		<md-button class="md-raised md-primary center" type="submit"
 			data-dismiss="modal" aria-hidden="true" ng-click="vm.submit1()"
-			style="width:50px;margin: 0 256px;">저장</md-button>
+			style="width: 50px; margin: 0 39%;">저장</md-button>
 		</form>
 	</modal> <!-- 모달 body -->
 </body>

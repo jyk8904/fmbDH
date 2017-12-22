@@ -98,7 +98,7 @@
 		padding:0;
 	}
 	.smallBox {
-		min-height: 320px;
+		min-height: 270px;
 	}
 	.largeBox {
 		min-height: 0;
@@ -142,13 +142,13 @@
 		height: 100%;
 	}
 	#MobileGauge {
-		height: 150px;
-		margin: 10px 0 -20px 0;s
+	    height: 150px;
+    margin: 10px 0 17px 0;
 	}
 	#MobileNorunChart, #MobileStandbyChart, #MobileAlarmChart{
-		height: 150px;
-		margin-top: 11%;
-    margin-bottom: -9%;
+	    height: 150px;
+    margin-top: 11%;
+    margin-bottom: -15%;
 	}
 	
 	#MoboilePieChart{
@@ -166,7 +166,6 @@
 	}
 	.gridArea3 {
 		height: 45%;
-		bottom: -54px;
 	}
 	.gridArea3 .gaugeT{
 		width: 48%;
@@ -231,7 +230,6 @@
     min-width: 59%;
 	} 
 	.legend{
-	    z-index: 20000;
     background-image: url(../../assets/img/system/legend5.png);
     background-size: cover;
     background-repeat: no-repeat;
@@ -453,7 +451,6 @@
     text-align: left;
 	} 
 	.legend{
-	    z-index: 20000;
     background-image: url(../../assets/img/system/legend5.png);
     background-size: cover;
     background-repeat: no-repeat;
@@ -620,7 +617,6 @@
     text-align: left;
 	} 
 	.legend{
-	z-index: 20000;
     background-image: url(../../assets/img/system/legend5.png);
     background-size: cover;
     background-repeat: no-repeat;

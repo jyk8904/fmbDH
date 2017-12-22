@@ -64,7 +64,15 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		var remainder = null;
 		var startRan = null;
 		var endRan = null;
-		
+		self.prevtest = function(){
+			console.log("asf")
+			$("#FmbTotal").carousel("prev");
+			
+		}
+		$(document).ready(function(){
+			  $("#FmbTotal").carousel({interval: 3000});
+			  
+		});
 		$scope.isMobile = false;
 		// 변수 선언 및 디폴트 값 세팅 
 		var rankRunInfoList = {};
@@ -143,6 +151,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		}
 				
 		function splitPlanProgress() {
+			 
 			firstFlag = true;
 			if($scope.isMobile){
 			count = 8;										// 다량의 데이터를 나눠 보여줄 횟수
@@ -155,7 +164,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 			endRan =0;														// 한번에 보여줄 데이터의 마지막 num
 			getFltrdData();
 			//FmbTotal의 (datatime/횟수)를 interval 지정하여 다량의 데이터를 나눠보여줌 
-			splitChartInterval = $interval( getFltrdData, thisDataTime/count, count-1); 
+			splitChartInterval = $interval(getFltrdData, thisDataTime/count, count-1); 
 						
 			function getFltrdData(){
 				if (firstFlag == true){
@@ -166,19 +175,22 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 				startRan= endRan;
 				if(remainder!=0){
 					remainder -= 1;
-					endRan= endRan + quotient + 1;
+					endRan= endRan + quotient + 2;
 				}else{
 					endRan= endRan + quotient;
 				}
 				
 				for(var j=startRan; j<endRan; j++){
 					filteredData.push(planProgressList[j]);
+					 
 				}
 				if ($scope.isMobile) {
                     MobilePlanProgress();
                 } else {
+                	 
                     planProgress();
                 }
+				 
 				firstFlag = false;
 			}
 		}
@@ -569,7 +581,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 			{
 				if (test4 == null)
 				{
-					test4 = AmCharts.makeChart("chartdiv",{"type": "serial","rotate": true,"categoryField": "lineMidNm","angle": 10,"autoMarginOffset": 20,"depth3D": 10,"marginRight": 10,"marginTop": 30,"plotAreaBorderAlpha": 0,"plotAreaBorderColor": "#008000","plotAreaFillAlphas": 0,"sequencedAnimation": false,"startDuration": 0,"startEffect": "easeOutSine","backgroundColor": "#E7E7E7","borderColor": "#E7E7E7","fontSize": 13,"theme": "default","categoryAxis": {"gridPosition": "start","gridAlpha": 0.2,"gridColor": "#E5E5E5","color": "#E7E7E7","axisAlpha": 0},"trendLines": [],"graphs": [{"balloonText": "[[lineNm]] \n 진도율:[[curCountPer]] % 진행","columnWidth": 0.61,"fillAlphas": 1,"fillColors": "#ecbd89","fixedColumnWidth": 20,"fontSize": 4,"id": "AmGraph-1","labelText": "","lineAlpha": 0,"lineColor": "#FFFFFF","negativeLineAlpha": 0,"title": "graph 1","type": "column","valueField": "curCountPer"},{"balloonText": "[[lineNm]] \n 진도율:[[curCountPer]] % 진행","balloonColor": "#FFFFFF","columnWidth": 0.61,"fillAlphas": 1,"fillColors": "#4F8298","fixedColumnWidth": 20,"id": "AmGraph-5","lineAlpha": 0,"lineColor": "#FFFFFF","lineThickness": 2,"negativeLineAlpha": 0,"negativeLineColor": "#E7E7E7","tabIndex": 1,"title": "graph 5","type": "column","valueField": "goalCountPer"}],"guides": [],"valueAxes": [{"id": "ValueAxis-1","stackType": "100%","title": "","gridAlpha": 0.2,"gridColor": "#E5E5E5","color": "#E7E7E7"}],"allLabels": [],"balloon": {},"titles": [],"dataProvider": filteredData})
+					test4 = AmCharts.makeChart("chartdiv",{"type": "serial","rotate": true,"categoryField": "lineNm","angle": 10,"autoMarginOffset": 20,"depth3D": 10,"marginRight": 10,"marginTop": 30,"plotAreaBorderAlpha": 0,"plotAreaBorderColor": "#008000","plotAreaFillAlphas": 0,"sequencedAnimation": false,"startDuration": 0,"startEffect": "easeOutSine","backgroundColor": "#E7E7E7","borderColor": "#E7E7E7","fontSize": 13,"theme": "default","categoryAxis": {"gridPosition": "start","gridAlpha": 0.2,"gridColor": "#E5E5E5","color": "#E7E7E7","axisAlpha": 0},"trendLines": [],"graphs": [{"balloonText": "[[lineNm]] \n 진도율:[[curCountPer]] % 진행","columnWidth": 0.61,"fillAlphas": 1,"fillColors": "#ecbd89","fixedColumnWidth": 20,"fontSize": 4,"id": "AmGraph-1","labelText": "","lineAlpha": 0,"lineColor": "#FFFFFF","negativeLineAlpha": 0,"title": "graph 1","type": "column","valueField": "curCountPer"},{"balloonText": "[[lineNm]] \n 진도율:[[curCountPer]] % 진행","balloonColor": "#FFFFFF","columnWidth": 0.61,"fillAlphas": 1,"fillColors": "#4F8298","fixedColumnWidth": 20,"id": "AmGraph-5","lineAlpha": 0,"lineColor": "#FFFFFF","lineThickness": 2,"negativeLineAlpha": 0,"negativeLineColor": "#E7E7E7","tabIndex": 1,"title": "graph 5","type": "column","valueField": "goalCountPer"}],"guides": [],"valueAxes": [{"id": "ValueAxis-1","stackType": "100%","title": "","gridAlpha": 0.2,"gridColor": "#E5E5E5","color": "#E7E7E7"}],"allLabels": [],"balloon": {},"titles": [],"dataProvider": filteredData})
 				}
 				else
 				{
@@ -681,7 +693,6 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		function MobileBarChart() {
 			try
 			{
-				console.log("히힣")
 				console.log(defectRankList)
 				if (defectBar == null)
 				{
@@ -701,7 +712,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 			{
 				if (test8 == null)
 				{
-					test8 = AmCharts.makeChart("MobilePlanProgress",{"type": "serial","rotate": false,"categoryField": "lineNm","angle": 10,"autoMarginOffset": 20,"depth3D": 10,"marginRight": 10,"marginTop": 30,"plotAreaBorderAlpha": 0,"plotAreaBorderColor": "#008000","plotAreaFillAlphas": 0,"sequencedAnimation": false,"startDuration": 0,"startEffect": "easeOutSine","backgroundColor": "#E7E7E7","borderColor": "#E7E7E7","fontSize": 13,"theme": "default","categoryAxis": {"gridPosition": "start","gridAlpha": 0.2,"gridColor": "#E5E5E5","color": "#E7E7E7","axisAlpha": 0},"trendLines": [],"graphs": [{"balloonText": "[[lineNm]] \n 진도율:[[curCountPer]] % 진행","columnWidth": 0.61,"fillAlphas": 1,"fillColors": "#ecbd89","fixedColumnWidth": 20,"fontSize": 4,"id": "AmGraph-1","labelText": "","lineAlpha": 0,"lineColor": "#FFFFFF","negativeLineAlpha": 0,"title": "graph 1","type": "column","valueField": "curCountPer"},{"balloonText": "[[lineNm]] \n 진도율:[[curCountPer]] % 진행","balloonColor": "#FFFFFF","columnWidth": 0.61,"fillAlphas": 1,"fillColors": "#4F8298","fixedColumnWidth": 20,"id": "AmGraph-5","lineAlpha": 0,"lineColor": "#FFFFFF","lineThickness": 2,"negativeLineAlpha": 0,"negativeLineColor": "#E7E7E7","tabIndex": 1,"title": "graph 5","type": "column","valueField": "goalCountPer"}],"guides": [],"valueAxes": [{"id": "ValueAxis-1","stackType": "100%","title": "","gridAlpha": 0.2,"gridColor": "#E5E5E5","color": "#E7E7E7"}],"allLabels": [],"balloon": {},"titles": [],"dataProvider": filteredData})
+					test8 = AmCharts.makeChart("MobilePlanProgress",{"type": "serial","rotate": false,"categoryField": "lineMidNm","angle": 10,"autoMarginOffset": 20,"depth3D": 10,"marginRight": 10,"marginTop": 30,"plotAreaBorderAlpha": 0,"plotAreaBorderColor": "#008000","plotAreaFillAlphas": 0,"sequencedAnimation": false,"startDuration": 0,"startEffect": "easeOutSine","backgroundColor": "#E7E7E7","borderColor": "#E7E7E7","fontSize": 13,"theme": "default","categoryAxis": {"gridPosition": "start","gridAlpha": 0.2,"gridColor": "#E5E5E5","color": "#E7E7E7","axisAlpha": 0},"trendLines": [],"graphs": [{"balloonText": "[[lineNm]] \n 진도율:[[curCountPer]] % 진행","columnWidth": 0.61,"fillAlphas": 1,"fillColors": "#ecbd89","fixedColumnWidth": 20,"fontSize": 4,"id": "AmGraph-1","labelText": "","lineAlpha": 0,"lineColor": "#FFFFFF","negativeLineAlpha": 0,"title": "graph 1","type": "column","valueField": "curCountPer"},{"balloonText": "[[lineNm]] \n 진도율:[[curCountPer]] % 진행","balloonColor": "#FFFFFF","columnWidth": 0.61,"fillAlphas": 1,"fillColors": "#4F8298","fixedColumnWidth": 20,"id": "AmGraph-5","lineAlpha": 0,"lineColor": "#FFFFFF","lineThickness": 2,"negativeLineAlpha": 0,"negativeLineColor": "#E7E7E7","tabIndex": 1,"title": "graph 5","type": "column","valueField": "goalCountPer"}],"guides": [],"valueAxes": [{"id": "ValueAxis-1","stackType": "100%","title": "","gridAlpha": 0.2,"gridColor": "#E5E5E5","color": "#E7E7E7"}],"allLabels": [],"balloon": {},"titles": [],"dataProvider": filteredData})
 				}
 				else
 				{
