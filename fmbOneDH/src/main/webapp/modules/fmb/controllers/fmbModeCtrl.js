@@ -312,7 +312,7 @@ angular
 									// console.log(self.eqptList);
 
 								} else if (self.eqptParamVo.eqptType == "COUNT") {
-									
+									debugger;
 									var classList = $filter('orderBy')(self.eqptList, 'eqptCnm');
 									if (classList.length == 0) {
 										$scope.crtEqpt.cnm = 'count001';
@@ -321,9 +321,12 @@ angular
 
 										$scope.crtEqpt.cnm = 'count'+ leadingZeros(parseInt(latestNum) + 1,3);
 									}
+									console.log(self.countList)
+									debugger;
 									//차집합 countList - 이미 생성된 eqptList
 									var tmp = {}, res = [];
 									for (var i = 0; i < self.countList.length; i++)
+										debugger;
 										tmp[self.countList[i].plcId] = 1;
 									if (self.eqptList.length!=0) {//eqptList가 있을경우
 										for (var i = 0; i < self.eqptList.length; i++) {
@@ -331,6 +334,7 @@ angular
 												delete tmp[self.eqptList[i].id];
 										}
 										for ( var k in tmp)
+											debugger;
 											res.push(k);
 										console.log(res);
 										

@@ -24,7 +24,8 @@ angular
 	    
     var self = this;
     var workerList = CmmWorkerSrvc;
-    var fact_id = "004";
+    var fact_id = "D";
+    /*var fact_id = "004";*/
     var promise = null;
     var length = null;
     var dangle = null;
