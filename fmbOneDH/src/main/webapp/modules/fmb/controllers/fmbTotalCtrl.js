@@ -65,14 +65,23 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 		var startRan = null;
 		var endRan = null;
 		self.prevtest = function(){
-			console.log("asf")
 			$("#FmbTotal").carousel("prev");
 			
 		}
-		$(document).ready(function(){
-			  $("#FmbTotal").carousel({interval: 3000});
-			  
-		});
+		self.nexttest = function(){
+			$("#FmbTotal").carousel("next");
+			
+		}
+		
+		/*$(document).ready(function(){
+		    // Activate Carousel
+		    $("#FmbTotal").carousel({interval: 4000});
+		});*/
+		//defalutCarousel();
+		
+		//function default() {
+			
+		//}
 		$scope.isMobile = false;
 		// 변수 선언 및 디폴트 값 세팅 
 		var rankRunInfoList = {};
@@ -617,6 +626,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					test5.validateData();
 		 		}				
 			}
+				 $("#FmbTotal").carousel({interval: 2000}); 
 			}
 			finally{}
 			//라인가동현황 그리드
@@ -624,6 +634,7 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 			self.gauge.standby = self.gaugeRunInfoList["0"].standbyCount + " 라 인";
 			self.gauge.norun = self.gaugeRunInfoList["0"].noRunCount + " 라 인";
 			self.gauge.alarm = self.gaugeRunInfoList["0"].alarmCount + " 라 인";
+			
 		}
 		
 		//알람발생추이
@@ -640,7 +651,9 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					test6.validateData();
 				}
 			}
-			finally{}
+			finally{
+				 
+			}
 		}
 			//대기발생추이
 		function MobileStandbyDateRunInfo() {	
@@ -656,7 +669,9 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					test7.validateData();
 				}
 			}
-			finally{}
+			finally{
+				
+			}
 		}
 		//재작업 발생추이
 		function MobileNorunDateRunInfo() {	
@@ -672,7 +687,9 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					test10.validateData();
 				}
 			}
-			finally{}
+			finally{
+				
+			}
 		}
 		function MobilePie() {
 			try
@@ -687,7 +704,9 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					defectPie.validateData();
 				}
 			}
-			finally{}
+			finally{
+				
+			}
 			
 		}
 		function MobileBarChart() {
@@ -704,7 +723,9 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					defectBar.validateData();
 				}
 			}
-			finally{}
+			finally{
+				
+			}
 		}
 		function MobilePlanProgress(){
 
@@ -719,8 +740,10 @@ angular.module('app').controller('FmbTotalCtrl',['CmmAjaxService','CmmWorkerSrvc
 					test8.dataProvider = filteredData
 					test8.validateData();
 				}
+				 
 			}
-			finally{}
+			finally{
+			}
 		}
 
 		//워커 스타트

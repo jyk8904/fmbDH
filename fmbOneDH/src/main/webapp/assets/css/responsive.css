@@ -15,6 +15,12 @@
 	padding-left: 3%;
 	letter-spacing: -1px;
 	}
+	.nextprev{
+	position: absolute;
+    right: 6%;
+    top: 3%;
+    width: 100px;
+	}
 	.left-header{
 	max-width: 323px;
 	}
@@ -98,7 +104,7 @@
 		padding:0;
 	}
 	.smallBox {
-		min-height: 270px;
+		    min-height: 321px;
 	}
 	.largeBox {
 		min-height: 0;
@@ -143,12 +149,11 @@
 	}
 	#MobileGauge {
 	    height: 150px;
-    margin: 10px 0 17px 0;
+        margin: 9% 0 19% 0;
 	}
 	#MobileNorunChart, #MobileStandbyChart, #MobileAlarmChart{
 	    height: 150px;
     margin-top: 11%;
-    margin-bottom: -15%;
 	}
 	
 	#MoboilePieChart{
@@ -311,6 +316,13 @@
 		overflow: visible;
 		wh		
 	}
+	/* 생산종합현황 */
+	.nextprev{
+	position: absolute;
+    right: 6%;
+    top: 3%;
+    width: 100px;
+	}
 	/* 설비정보 팝업 */
 	.eqptPopupTitle {
 		min-height:25px;
@@ -421,6 +433,13 @@
 	.lineBtnSm {
 		width: 10px;
 		height: 10px;
+	}
+	/* 생산종합현황 */
+	.nextprev{
+	position: absolute;
+    right: 6%;
+    top: 3%;
+    width: 100px;
 	}
 	/* 생산실적 외 모니터링  */
 	.buttonArea {

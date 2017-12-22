@@ -95,6 +95,7 @@
 <!-- Bootstrap CSS -->
 <!-- <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min(new).css"> -->
 <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+
 <link rel="stylesheet"
 	href="assets/css/bootstrap/bootstrap-theme.min.css">
 
@@ -319,12 +320,12 @@
 	<div ng-clock data-ng-view id="maindiv"
 		class="col-md-12 col-sm-12 col-xs-12" style="padding: 0"></div>
 
-<!-- 	<bc-form-footer> 알람정보 하단 바 시작
+	<bc-form-footer> <!-- 알람정보 하단 바 시작 -->
 	<div class="col-md-12 col-sm-12 col-xs-12" ng-if="isMobile == false" style="padding: 0">
 		<div class="alarm_data"	style="background-color: rgb(255, 255, 255); height: 25px;">
 			<img src="assets/img/system/img_top_ico.gif"
 				style="margin: -11px 0px 0px -5px; width: 42px; position: absolute; z-index: 1000;">
-			mdDrtv slide
+			<!-- mdDrtv slide -->
 			<div slide data="alarmList" id='marquee' ng-if="showBar1==true">
 				<ul id='banner' class="simply-scroll-list"
 					style="background-color: #333;" ng-style="{'width':alarmListWdth}">
@@ -337,7 +338,7 @@
 
 		</div>
 	</div>
-	</bc-form-footer>  -->
+	</bc-form-footer> 
 	<!-- 모달 body --> 
 	<modal id="pageSetting" title="페이지 전환 설정"	 visible="vm.showModal">
 	<form name="settingForm">
